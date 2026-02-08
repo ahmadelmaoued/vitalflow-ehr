@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+
+<body>
+    <h1>Welcome to My <button onclick="cartQuantity;
+    console.log(`Quantity of items in cart: ${cartQuantity}`);"></button></h1>
+    <h2><button onclick="cartQuantity">Add to Cart</button></h2>
+    <h3><button onclick="cartQuantity">Add 2 to Cart</button></h3>
+    <h4><button onclick="cartQuantity">Reset Cart</button></h4>
+</body>
+</html>
+
+<style>
+  h1 {
+    color: blue;
+    text-align: left;
+  }
+</style>
+
+<script>
+let cartQuantity = 0;
+function addToCart(quantity) {
+    cartQuantity += 1;
+    console.log(`Quantity of items in cart: ${cartQuantity}`);
+}
+</script>

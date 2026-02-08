@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SULTAN | Premium Saj Shawarma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --olive-deep: #1e261b;
+            --olive-mid: #3d4a35;
+            --gold: #c5a059;
+            --white: #ffffff;
+            --soft-gray: #f4f6f3;
+            --glass: rgba(255, 255, 255, 0.9);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; font-family: 'Outfit', sans-serif; background: var(--soft-gray); color: var(--olive-deep); }
+        [dir="rtl"] { font-family: 'Noto Sans Arabic', sans-serif; }
+
+        /* --- Header --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 15px 24px; display: flex; justify-content: space-between; align-items: center;
+            background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--olive-deep); }
+        .pill { 
+            background: var(--olive-deep); color: var(--gold); border: none;
+            padding: 10px 18px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+        }
+
+        /* --- Hero with Texture & Pattern --- */
+        .kasane {
+            height: 90vh; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 30px;
+            background: var(--olive-deep);
+        }
+        .kasane-bg {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center; z-index: 1;
+        }
+        /* Pattern Overlay */
+        .kasane-pattern {
+            position: absolute; inset: 0; z-index: 2; opacity: 0.15;
+        }
+        .hero-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 3; max-width: 600px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 12vw, 5rem); color: var(--white); margin: 0; font-style: italic; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .cta-hero { 
+            position: relative; overflow: hidden; display: inline-block;
+            background: linear-gradient(45deg, var(--gold), #e0c285);
+            color: var(--white); padding: 22px 50px; border-radius: 100px; 
+            text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.3); transition: var(--transition); border: none; margin-top: 40px;
+        }
+        .cta-hero::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg); animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 0% { transform: translate(-100%, -100%) rotate(45deg); } 100% { transform: translate(100%, 100%) rotate(45deg); } }
+
+        /* --- Category Nav --- */
+        .cat-nav {
+            position: sticky; top: 68px; z-index: 999; background: var(--white);
+            padding: 15px 24px; display: flex; gap: 30px; overflow-x: auto; scrollbar-width: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        }
+        .cat-nav::-webkit-scrollbar { display: none; }
+        .cat-link { font-weight: 700; font-size: 0.85rem; color: #bbb; white-space: nowrap; cursor: pointer; padding-bottom: 5px; }
+        .cat-link.active { color: var(--olive-deep); border-bottom: 3px solid var(--gold); }
+
+        /* --- Menu List --- */
+        .section-title { padding: 50px 24px 15px; font-size: 2rem; font-weight: 800; color: var(--olive-deep); font-family: 'Playfair Display', serif; }
+        .menu-container { padding: 0 20px 40px; display: grid; gap: 20px; }
+        @media(min-width: 992px) { .menu-container { grid-template-columns: repeat(2, 1fr); padding: 0 10%; } }
+
+        .item-card { 
+            background: var(--white); border-radius: 30px; padding: 20px; display: flex; gap: 20px; align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03); transition: var(--transition); border: 1px solid rgba(0,0,0,0.02);
+        }
+        .item-img { width: 110px; height: 110px; border-radius: 22px; object-fit: cover; }
+        .item-info { flex: 1; }
+        .item-info h3 { margin: 0 0 5px; font-size: 1.2rem; font-weight: 700; color: var(--olive-deep); }
+        .item-price { color: var(--gold); font-weight: 800; font-size: 1.1rem; }
+
+        .mod-box { display: flex; gap: 8px; margin-top: 12px; }
+        .mod-chip input { display: none; }
+        .mod-chip label { 
+            font-size: 0.7rem; font-weight: 700; padding: 6px 12px; border-radius: 10px; 
+            background: #f8f8f8; border: 1.5px solid #eee; display: block; transition: 0.3s;
+        }
+        .mod-chip input:checked + label { background: var(--olive-deep); border-color: var(--olive-deep); color: var(--gold); }
+
+        .add-circle { 
+            width: 48px; height: 48px; border-radius: 50%; background: var(--soft-gray); border: none;
+            color: var(--olive-deep); font-size: 1.6rem; font-weight: 300; cursor: pointer; transition: 0.3s;
+        }
+        .add-circle:hover { background: var(--olive-deep); color: var(--gold); }
+
+        /* --- Drawer & Notes --- */
+        .drawer {
+            position: fixed; bottom: -100%; left: 0; width: 100%; max-height: 85vh;
+            background: var(--white); z-index: 2000; padding: 40px 24px 24px; 
+            border-radius: 40px 40px 0 0; transition: var(--transition);
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+        }
+        .drawer.active { bottom: 0; }
+        .special-notes { 
+            width: 100%; padding: 18px; border-radius: 20px; border: 2px solid #f0f0f0; 
+            background: #fdfdfd; font-family: inherit; resize: none; margin: 15px 0; font-size: 0.9rem;
+        }
+
+        .order-bar {
+            position: fixed; bottom: 30px; left: 20px; right: 20px; z-index: 1001;
+            background: var(--olive-deep); color: var(--white); height: 75px; border-radius: 24px;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); transform: translateY(150px); transition: var(--transition);
+        }
+        .order-bar.show { transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">SULTAN</div>
+        <div class="nav-btns">
+            <button class="pill" onclick="toggleCurrency()" id="currBtn">USD</button>
+            <button class="pill" onclick="toggleLang()" id="langBtn">AR</button>
+        </div>
+    </nav>
+
+    <section class="hero kasane">
+         <video autoplay muted loop class="hero-video">
+    <source src="would you eat this_shorts.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+        <div class="kasane-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <h1 id="hTitle">The Sultan of Saj</h1>
+            <button class="cta-hero" id="hCta" onclick="document.getElementById('m-shw').scrollIntoView()">ORDER NOW</button>
+        </div>
+    </section>
+
+    <div class="cat-nav">
+        <div class="cat-link active" id="c1" onclick="scrollToSec('m-shw', this)">SHAWARMA</div>
+        <div class="cat-link" id="c2" onclick="scrollToSec('m-side', this)">APPETIZERS</div>
+        <div class="cat-link" id="c3" onclick="scrollToSec('m-loc', this)">FIND US</div>
+    </div>
+
+    <div id="m-shw" class="section-title">Saj Shawarma</div>
+    <div class="menu-container" id="shwGrid"></div>
+
+    <div id="m-side" class="section-title">Small Plates</div>
+    <div class="menu-container" id="sideGrid"></div>
+
+    <div id="m-loc" style="padding: 60px 24px;">
+        <h2 class="section-title" style="padding:0 0 20px 0" id="lTitle">Our Location</h2>
+        <iframe style="width:100%; height:350px; border-radius:35px; border:none; box-shadow: 0 10px 40px rgba(0,0,0,0.05);" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13304.76757827806!2d35.370395!3d33.560613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ee1ef80637953%3A0x7d6b38f8f05e4640!2sSidon%2C%20Lebanon!5e0!3m2!1sen!2slb!4v1700000000000!5m2!1sen!2slb"></iframe>
+    </div>
+
+    <footer style="background:var(--olive-deep); color:var(--white); padding: 80px 24px 140px; text-align:center;">
+        <div style="font-family:'Playfair Display'; color:var(--gold); font-size:2.5rem; margin-bottom:20px;">SULTAN</div>
+        <div id="f-addr" style="opacity:0.6; margin-bottom:10px;">El-Naser Street, Sidon, Lebanon</div>
+        <div id="f-hours" style="opacity:0.6; margin-bottom:10px;">Open Daily: 12:00 PM - 1:00 AM</div>
+        <div id="f-copy" style="opacity:0.3; font-size:0.7rem; margin-top:40px;">© 2026 SULTAN SAJ. ALL RIGHTS RESERVED.</div>
+    </footer>
+
+    <div class="drawer" id="cartDrawer">
+        <div style="width: 50px; height: 6px; background: #eee; border-radius: 10px; margin: -20px auto 25px;"></div>
+        <h2 id="dTitle" style="margin:0; font-weight:800; font-size:1.6rem">My Order</h2>
+        <div id="cartList" style="flex:1; overflow-y:auto; margin-top: 25px;"></div>
+        <textarea class="special-notes" id="orderNotes" placeholder="Special instructions (e.g. no onion, well done...)"></textarea>
+        <button class="cta-hero" style="width:100%; border:none; cursor:pointer;" onclick="checkout()" id="dCheckout">CONFIRM ORDER</button>
+        <button onclick="toggleCart()" id="dClose" style="background:none; border:none; margin-top:15px; font-weight:700; color:#aaa; cursor:pointer;">CONTINUE SHOPPING</button>
+    </div>
+
+    <div class="order-bar" id="orderBar" onclick="toggleCart()">
+        <span id="bItems" style="font-weight:800; color: var(--gold)">0 ITEMS</span>
+        <span id="bTotal" style="font-weight:800; font-size:1.2rem;">$0.00</span>
+    </div>
+
+    <script>
+        const menu = [
+            { id: 1, type: 'shw', en: "The Sultan's Chicken", ar: "شاورما دجاج السلطان", price: 6, img: "https://i0.wp.com/nutrient-matters.com/wp-content/uploads/2025/03/IMG_5274.jpg?resize=768%2C1355&ssl=1" },
+            { id: 2, type: 'shw', en: "The Royal Beef Saj", ar: "شاورما لحم ملكي صاج", price: 8, img: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400" },
+            { id: 3, type: 'side', en: "Creamy Hummus", ar: "حمص كريمي", price: 5, img: "https://cdn.loveandlemons.com/wp-content/uploads/2024/08/hummus-recipe-800x1024.jpg" },
+            { id: 4, type: 'side', en: "Fresh Fattoush", ar: "فتوش طازج", price: 5, img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400" }
+        ];
+
+        let cart = [], lang = 'en', curr = 'USD', rate = 90000;
+
+        const trans = {
+            en: { 
+                hTitle: "The Sultan of Saj", hCta: "ORDER NOW", c1: "SHAWARMA", c2: "APPETIZERS", c3: "FIND US",
+                shwT: "Saj Shawarma", sideT: "Small Plates", lTitle: "Our Location", 
+                fAddr: "El-Naser Street, Sidon, Lebanon", fHours: "Open Daily: 12:00 PM - 1:00 AM",
+                fCopy: "© 2026 SULTAN SAJ. ALL RIGHTS RESERVED.", dTitle: "My Order", dCheckout: "CONFIRM ORDER",
+                dClose: "CONTINUE SHOPPING", notePl: "Special instructions (e.g. no onion, well done...)", 
+                np: "No Pickles", eg: "Extra Garlic", add: "ADD", items: "ITEMS"
+            },
+            ar: { 
+                hTitle: "سلطان الصاج", hCta: "اطلب الآن", c1: "شاورما", c2: "مقبلات", c3: "موقعنا",
+                shwT: "شاورما صاج", sideT: "أطباق صغيرة", lTitle: "موقعنا", 
+                fAddr: "شارع النصر، صيدا، لبنان", fHours: "يفتح يومياً: ١٢:٠٠ ظهراً - ١:٠٠ صباحاً",
+                fCopy: "© ٢٠٢٦ سلطان الصاج. جميع الحقوق محفوظة.", dTitle: "طلبيتي", dCheckout: "تأكيد الطلب",
+                dClose: "متابعة التسوق", notePl: "تعليمات خاصة (مثلاً بدون بصل، محمرة...) ", 
+                np: "بدون كبيس", eg: "ثوم إضافي", add: "إضافة", items: "أصناف"
+            }
+        };
+
+        function scrollToSec(id, el) {
+            const offset = 80;
+            const element = document.getElementById(id);
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            document.querySelectorAll('.cat-link').forEach(l => l.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function render() {
+            const shwG = document.getElementById('shwGrid');
+            const sideG = document.getElementById('sideGrid');
+            shwG.innerHTML = ''; sideG.innerHTML = '';
+            
+            document.getElementById('m-shw').innerText = trans[lang].shwT;
+            document.getElementById('m-side').innerText = trans[lang].sideT;
+
+            menu.forEach(item => {
+                const p = curr === 'USD' ? `$${item.price}` : `${(item.price * rate).toLocaleString()} LBP`;
+                const mods = item.type === 'shw' ? `
+                    <div class="mod-box">
+                        <div class="mod-chip"><input type="checkbox" id="np-${item.id}"><label for="np-${item.id}">${trans[lang].np}</label></div>
+                        <div class="mod-chip"><input type="checkbox" id="eg-${item.id}"><label for="eg-${item.id}">${trans[lang].eg}</label></div>
+                    </div>` : '';
+
+                shwG.innerHTML += item.type === 'shw' ? createCard(item, p, mods) : '';
+                sideG.innerHTML += item.type === 'side' ? createCard(item, p, '') : '';
+            });
+        }
+
+        function createCard(item, price, mods) {
+            return `
+                <div class="item-card">
+                    <img src="${item.img}" class="item-img">
+                    <div class="item-info">
+                        <h3>${lang === 'en' ? item.en : item.ar}</h3>
+                        <span class="item-price">${price}</span>
+                        ${mods}
+                    </div>
+                    <button class="add-circle" onclick="addToCart(${item.id})">+</button>
+                </div>`;
+        }
+
+        function addToCart(id) {
+            const item = menu.find(m => m.id === id);
+            const np = document.getElementById(`np-${id}`)?.checked || false;
+            const eg = document.getElementById(`eg-${id}`)?.checked || false;
+            const existing = cart.find(c => c.id === id && c.np === np && c.eg === eg);
+            if(existing) existing.qty++; else cart.push({...item, qty: 1, np, eg});
+            updateCart();
+        }
+
+        function updateCart() {
+            const list = document.getElementById('cartList');
+            list.innerHTML = ''; let total = 0, count = 0;
+            cart.forEach((item, idx) => {
+                total += (item.price * item.qty); count += item.qty;
+                const m = []; if(item.np) m.push(trans[lang].np); if(item.eg) m.push(trans[lang].eg);
+                list.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px">
+                        <div>
+                            <p style="margin:0; font-weight:700">${lang === 'en' ? item.en : item.ar}</p>
+                            <small style="color:var(--gold)">${m.join(' • ')}</small>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; background:var(--soft-gray); padding:8px 14px; border-radius:12px;">
+                            <button style="border:none; background:none; font-weight:900" onclick="changeQty(${idx}, -1)">-</button>
+                            <span style="font-weight:800">${item.qty}</span>
+                            <button style="border:none; background:none; font-weight:900" onclick="changeQty(${idx}, 1)">+</button>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('orderBar').classList.toggle('show', count > 0);
+            document.getElementById('bItems').innerText = `${count} ${trans[lang].items}`;
+            document.getElementById('bTotal').innerText = curr === 'USD' ? `$${total}` : `${(total * rate).toLocaleString()} LBP`;
+        }
+
+        function changeQty(idx, delta) {
+            cart[idx].qty += delta;
+            if(cart[idx].qty <= 0) cart.splice(idx, 1);
+            updateCart();
+        }
+
+        function toggleCart() { document.getElementById('cartDrawer').classList.toggle('active'); }
+
+        function toggleLang() {
+            lang = lang === 'en' ? 'ar' : 'en';
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langBtn').innerText = lang === 'en' ? 'AR' : 'EN';
+            document.getElementById('orderNotes').placeholder = trans[lang].notePl;
+            Object.keys(trans[lang]).forEach(key => { if(document.getElementById(key)) document.getElementById(key).innerText = trans[lang][key]; });
+            render(); updateCart();
+        }
+
+        function toggleCurrency() {
+            curr = curr === 'USD' ? 'LBP' : 'USD';
+            document.getElementById('currBtn').innerText = curr === 'USD' ? 'LBP' : 'USD';
+            render(); updateCart();
+        }
+
+        function checkout() {
+            const notes = document.getElementById('orderNotes').value;
+            let msg = `*Order from SULTAN*\n\n`;
+            cart.forEach(i => msg += `• ${i.qty}x ${i.en} ${i.np?'[No Pickles]':''} ${i.eg?'[Extra Garlic]':''}\n`);
+            if(notes) msg += `\n*Note:* ${notes}`;
+            msg += `\n\n*Total:* ${document.getElementById('bTotal').innerText}`;
+            window.open(`https://wa.me/96171563488?text=${encodeURIComponent(msg)}`);
+        }
+
+        render();
+    </script>
+</body>
+</html>
+

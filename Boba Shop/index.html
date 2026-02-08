@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bubble Boba Café</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #D2B7E5;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(268,77%,81%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(271,81%,88%,1) 0, transparent 50%), 
+                radial-gradient(at 44% 48%, hsla(280,100%,95%,1) 0, transparent 50%), 
+                radial-gradient(at 97% 96%, hsla(252,69%,70%,1) 0, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4a4a4a;
+            padding-bottom: 100px;
+        }
+
+        /* --- SMOOTH PEARL FLOW (BEHIND EVERYTHING) --- */
+        .tapioca-container {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            pointer-events: none;
+            z-index: 0; /* Changed from 1 to 0 to put it behind everything */
+        }
+
+        .tapioca {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #555 0%, #111 40%, #000 100%);
+            box-shadow: inset -2px -2px 6px rgba(255,255,255,0.1), 3px 8px 12px rgba(0,0,0,0.3);
+            bottom: -80px;
+            will-change: transform;
+            opacity: 0.4; /* Made slightly transparent so it's less obtrusive */
+        }
+
+        @keyframes pearlRise {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 0.4; } /* Reduced from 0.8 */
+            90% { opacity: 0.4; } /* Reduced from 0.8 */
+            100% { transform: translateY(-115vh); opacity: 0; }
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header { 
+            text-align: center; 
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 { 
+            font-size: 3.5rem; 
+            color: #4834d4; 
+            text-shadow: 3px 3px 0px #fff;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.95); /* Increased opacity from 0.85 */
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .item-image { width: 100%; height: 350px; object-fit: cover; }
+        .item-content { padding: 20px; flex-grow: 1; }
+        .price { font-size: 1.4rem; font-weight: 700; color: #4834d4; }
+
+        /* --- ACTIONS --- */
+        .btn-add-initial {
+            background: #000; color: #fff;
+            border: none; padding: 10px 20px;
+            border-radius: 50px; font-weight: 600;
+            cursor: pointer; font-family: 'Fredoka';
+        }
+
+        .stepper {
+            display: flex; align-items: center;
+            background: #f0f0f0; border-radius: 50px; padding: 4px; gap: 10px;
+        }
+
+        .btn-step {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: none; background: #fff; font-weight: bold; cursor: pointer;
+        }
+
+        /* --- GOOGLE MAPS SECTION --- */
+        .location-section {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding: 0 20px;
+        }
+
+        .map-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            overflow: hidden;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .map-container h2 {
+            color: #4834d4;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 60px;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid #4834d4;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .opening-hours {
+            background: #f9f9f9;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .opening-hours h3 {
+            color: #4834d4;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .day {
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+
+        .time {
+            color: #666;
+        }
+
+        /* --- MOBILE-FIRST CHECKOUT BAR --- */
+        .bottom-checkout-bar {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: #000;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .bottom-checkout-bar.active {
+            bottom: 25px;
+        }
+
+        .cart-dot {
+            background: #4834d4;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+
+        /* --- CART DRAWER --- */
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1999; display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-slider {
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 70vh;
+            background: #fff; z-index: 2000; transition: 0.4s;
+            border-radius: 30px 30px 0 0; display: flex; flex-direction: column;
+        }
+        .cart-slider.open { bottom: 0; }
+
+        @media (min-width: 768px) {
+            .cart-slider { width: 400px; height: 100vh; top: 0; right: -400px; left: auto; border-radius: 0; }
+            .cart-slider.open { right: 0; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .map-container iframe { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tapioca-container" id="tapiocaContainer"></div>
+
+    <div class="bottom-checkout-bar" id="bottomBar" onclick="toggleCart()">
+        <div style="display: flex; align-items: center;">
+            <span style="font-weight: 600; font-size: 1.1rem;">View Cart</span>
+            <span class="cart-dot" id="cartCount">0</span>
+        </div>
+        <span id="cartTotal" style="font-weight: 700; font-size: 1.2rem;">$0.00</span>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-slider" id="cartSlider">
+        <div style="padding:25px; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+            <h2 style="color:#4834d4">Your Selection</h2>
+            <button onclick="toggleCart()" style="border:none; background:#eee; width:35px; height:35px; border-radius:50%; cursor:pointer; font-size:1.5rem;">&times;</button>
+        </div>
+        <div id="cartItems" style="flex:1; overflow-y:auto; padding:20px;"></div>
+        <div style="padding:25px; background:#fafafa;">
+            <button onclick="checkout()" style="width:100%; padding:20px; border-radius:20px; border:none; background:#00b894; color:white; font-weight:700; font-size:1.1rem; cursor:pointer;">Order via WhatsApp 💬</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Bubble Boba</h1>
+            <p style="font-size: 1.2rem; color: #666; margin-top: 10px;">Select your favorite flavor</p>
+        </header>
+        <div class="menu" id="menu"></div>
+    </div>
+
+    <!-- Google Maps Section -->
+    <div class="location-section">
+        <div class="map-container">
+            <h2>📍 Visit Us</h2>
+            <!-- Replace the src URL with your actual Google Maps embed link -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368459418!3d40.71312797933072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a165bedccab%3A0x2cb2ddf003b0e17e!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Footer with Opening Times -->
+    <footer>
+        <div class="footer-content">
+            <div class="opening-hours">
+                <h3>⏰ Opening Hours</h3>
+                <div class="hours-grid">
+                    <span class="day">Monday</span>
+                    <span class="time">9:00 AM - 8:00 PM</span>
+                    
+                    <span class="day">Tuesday</span>
+                    <span class="time">9:00 AM - 8:00 PM</span>
+                    
+                    <span class="day">Wednesday</span>
+                    <span class="time">9:00 AM - 8:00 PM</span>
+                    
+                    <span class="day">Thursday</span>
+                    <span class="time">9:00 AM - 9:00 PM</span>
+                    
+                    <span class="day">Friday</span>
+                    <span class="time">9:00 AM - 10:00 PM</span>
+                    
+                    <span class="day">Saturday</span>
+                    <span class="time">10:00 AM - 10:00 PM</span>
+                    
+                    <span class="day">Sunday</span>
+                    <span class="time">10:00 AM - 8:00 PM</span>
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">© 2026 Bubble Boba Café. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuItems = [
+            { id: 1, name: 'Strawberry Dream', price: 5.99, image: 'https://myveganminimalist.com/wp-content/uploads/2022/04/Strawberry-Milk-Tea-Boba-11.jpg' },
+            { id: 2, name: 'Mango Tango', price: 6.49, image: 'https://thebetterboba.com/wp-content/themes/yootheme/cache/0e/Better-Boba-mango-e1683227515222-0e9d6cee.jpeg' },
+            { id: 3, name: 'Matcha Zen', price: 6.99, image: 'https://abeautifulmess.com/wp-content/uploads/2024/04/matcha-boba-recipe-1024x1024.jpg' },
+            { id: 4, name: 'Peach Paradise', price: 5.99, image: 'https://frommybowl.com/wp-content/uploads/2022/08/Peach_Bubble_Tea_Boba_FromMyBowl_Pinterest-4-1.png' },
+            { id: 5, name: 'Chocolate Cloud', price: 6.49, image: 'https://myveganminimalist.com/wp-content/uploads/2022/02/Chocolate-Bubble-Milk-Tea-13.jpg' },
+            { id: 6, name: 'Lavender Bliss', price: 6.99, image: 'https://tyberrymuch.com/wp-content/uploads/2022/07/real-taro-milk-bubble-tea-index-800x800.jpg' }
+        ];
+
+        let cart = {};
+
+        function renderMenu() {
+            const container = document.getElementById('menu');
+            container.innerHTML = menuItems.map(item => {
+                const qty = cart[item.id] ? cart[item.id].quantity : 0;
+                return `
+                <div class="menu-item">
+                    <img src="${item.image}" class="item-image" alt="${item.name}">
+                    <div class="item-content">
+                        <h3>${item.name}</h3>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                            <span class="price">$${item.price.toFixed(2)}</span>
+                            <div>${qty > 0 ? renderStepper(item.id, qty) : `<button class="btn-add-initial" onclick="updateQty(${item.id}, 1)">Add +</button>`}</div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function renderStepper(id, qty) {
+            return `<div class="stepper">
+                <button class="btn-step" onclick="updateQty(${id}, -1)">-</button>
+                <span style="font-weight:700; min-width:20px; text-align:center;">${qty}</span>
+                <button class="btn-step" onclick="updateQty(${id}, 1)">+</button>
+            </div>`;
+        }
+
+        function updateQty(id, delta) {
+            const item = menuItems.find(i => i.id === id);
+            if (!cart[id]) cart[id] = { ...item, quantity: 0 };
+            cart[id].quantity += delta;
+            if (cart[id].quantity <= 0) delete cart[id];
+            renderMenu();
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const items = Object.values(cart);
+            const totalCount = items.reduce((sum, i) => sum + i.quantity, 0);
+            const totalPrice = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+            
+            document.getElementById('cartCount').textContent = totalCount;
+            document.getElementById('cartTotal').textContent = `$${totalPrice.toFixed(2)}`;
+            
+            const bar = document.getElementById('bottomBar');
+            if (totalCount > 0) bar.classList.add('active');
+            else bar.classList.remove('active');
+
+            document.getElementById('cartItems').innerHTML = items.map(item => `
+                <div style="display:flex; align-items:center; gap:15px; margin-bottom:15px; background:#f9f9f9; padding:12px; border-radius:15px;">
+                    <img src="${item.image}" style="width:50px; height:50px; border-radius:10px; object-fit:cover;" alt="${item.name}">
+                    <div style="flex:1"><b>${item.name}</b><br><small>$${item.price}</small></div>
+                    ${renderStepper(item.id, item.quantity)}
+                </div>
+            `).join('') || '<p style="text-align:center; color:#999; margin-top:40px;">Your cart is empty</p>';
+        }
+
+        function toggleCart() {
+            const slider = document.getElementById('cartSlider');
+            const overlay = document.getElementById('cartOverlay');
+            slider.classList.toggle('open');
+            overlay.style.display = slider.classList.contains('open') ? 'block' : 'none';
+        }
+
+        function checkout() {
+            const items = Object.values(cart);
+            if (!items.length) return;
+            let msg = "New Order from Bubble Boba:%0A%0A" + items.map(i => `${i.quantity}x ${i.name} ($${(i.price * i.quantity).toFixed(2)})`).join('%0A');
+            const total = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+            msg += `%0A%0ATotal: $${total.toFixed(2)}`;
+            window.open(`https://wa.me/96171563488?text=${msg}`, '_blank');
+        }
+
+        // --- PEARL GENERATOR ---
+        function createPearl() {
+            const pearl = document.createElement('div');
+            pearl.className = 'tapioca';
+            const size = Math.random() * 25 + 20;
+            pearl.style.width = `${size}px`;
+            pearl.style.height = `${size}px`;
+            pearl.style.left = `${Math.random() * 100}%`;
+            const duration = Math.random() * 3 + 7;
+            pearl.style.animation = `pearlRise ${duration}s linear forwards`;
+            document.getElementById('tapiocaContainer').appendChild(pearl);
+            setTimeout(() => pearl.remove(), duration * 1000);
+        }
+        setInterval(createPearl, 700);
+
+        renderMenu();
+    </script>
+</body>
+</html>
+

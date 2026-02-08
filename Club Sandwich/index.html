@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RED CLOVE | Deli Culture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E63946;
+            --black: #0A0A0A;
+        }
+
+        body {
+            background-color: var(--red);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .font-sync { font-family: 'Syncopate', sans-serif; }
+        
+        .giant-text {
+            font-size: clamp(3rem, 15vw, 12rem);
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            font-weight: 900;
+        }
+
+        /* Hero Image Container */
+        .hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            width: 100%;
+            height: 110%; /* Extra height for parallax */
+            object-fit: cover;
+            filter: brightness(0.4) contrast(1.1); /* Ensures text readability */
+        }
+
+        .reveal-box {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reveal-box img {
+            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .menu-row {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-row:hover {
+            background-color: var(--red);
+            color: white;
+            padding-left: 20px;
+        }
+
+        .no-select { -webkit-tap-highlight-color: transparent; }
+        
+        .sticky-header {
+            mix-blend-mode: difference;
+        }
+    </style>
+</head>
+<body class="no-select">
+
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center sticky-header">
+        <div class="font-sync text-xl tracking-tighter text-white">RED CLOVE</div>
+        <div class="text-[10px] uppercase font-bold tracking-widest bg-white text-black px-4 py-2">
+            Order Now
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-end p-6 pb-20 md:p-12 overflow-hidden">
+        <div class="hero-bg-container">
+            <img src="sandwich-with-chicken-vegetables.jpg" 
+                 alt="Artisanal Sandwich Background" 
+                 class="hero-bg-image">
+        </div>
+
+        <div class="mb-12 relative z-10">
+            <h2 class="text-red-600 font-sync text-xs mb-4 tracking-widest uppercase">Est. 2026 / New York</h2>
+            <h1 class="giant-text uppercase">Crave<br>Without<br><span class="text-red-600">Limits.</span></h1>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end relative z-10">
+            <p class="text-lg md:text-2xl font-bold leading-relaxed opacity-90 max-w-md bg-white/10 p-4 border border-red-400 rounded-lg">
+                A transcendental deli experience merging industrial precision with artisanal soul.
+            </p>
+            <div class="flex gap-4 font-sync text-[10px] tracking-tighter opacity-60">
+                <span>SCROLL TO EXPLORE</span>
+                <span>( 01 )</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="reveal-box h-[60vh] w-full border-y border-white/10">
+        <img src="https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&q=80&w=1600" 
+             class="w-full h-full object-cover">
+    </div>
+
+    <section class="py-24 px-6 md:px-12 bg-white text-black" id="menu">
+        <div class="mb-20">
+            <h3 class="font-sync text-4xl md:text-6xl uppercase mb-4">The Goods</h3>
+            <p class="font-bold text-xs uppercase tracking-widest opacity-40">Curated Inventory / Vol. 01</p>
+        </div>
+
+        <div class="flex flex-col">
+            <div class="menu-row py-8 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex gap-6 items-center">
+                    <span class="text-xs font-bold opacity-30">01</span>
+                    <h4 class="text-3xl md:text-5xl font-black uppercase">The Lava Club</h4>
+                </div>
+                <div class="flex items-center justify-between md:gap-12">
+                    <p class="text-xs uppercase font-bold opacity-60">Triple Brisket / Molten Core</p>
+                    <span class="text-2xl font-black">$18</span>
+                </div>
+            </div>
+
+            <div class="menu-row py-8 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex gap-6 items-center">
+                    <span class="text-xs font-bold opacity-30">02</span>
+                    <h4 class="text-3xl md:text-5xl font-black uppercase">Steel Baron</h4>
+                </div>
+                <div class="flex items-center justify-between md:gap-12">
+                    <p class="text-xs uppercase font-bold opacity-60">Smoked Pastrami / Chrome Rye</p>
+                    <span class="text-2xl font-black">$22</span>
+                </div>
+            </div>
+
+            <div class="menu-row py-8 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex gap-6 items-center">
+                    <span class="text-xs font-bold opacity-30">03</span>
+                    <h4 class="text-3xl md:text-5xl font-black uppercase">Neon Poultry</h4>
+                </div>
+                <div class="flex items-center justify-between md:gap-12">
+                    <p class="text-xs uppercase font-bold opacity-60">Crispy Thigh / Citrus Sparks</p>
+                    <span class="text-2xl font-black">$19</span>
+                </div>
+            </div>
+
+            <div class="menu-row py-8 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex gap-6 items-center">
+                    <span class="text-xs font-bold opacity-30">04</span>
+                    <h4 class="text-3xl md:text-5xl font-black uppercase">Carbon Beef</h4>
+                </div>
+                <div class="flex items-center justify-between md:gap-12">
+                    <p class="text-xs uppercase font-bold opacity-60">Charcoal Rub / Obsidian Bread</p>
+                    <span class="text-2xl font-black">$24</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="reveal-box h-[50vh] border-r border-black/10">
+            <img src="https://images.unsplash.com/photo-1592415499556-74fcb9f18667?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+        </div>
+        <div class="reveal-box h-[50vh]">
+            <img src="https://i0.wp.com/www.spicesinmydna.com/wp-content/uploads/2019/01/Brown-Sugar-BBQ-Baked-Wings-5.jpg?resize=768%2C1152&ssl=1" class="w-full h-full object-cover">
+        </div>
+    </div>
+
+    <footer class="bg-black text-white p-6 md:p-12">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="giant-text text-red-600 opacity-20" style="font-size: 5rem;">RED CLOVE</div>
+            <div class="grid grid-cols-2 gap-12 text-[10px] uppercase tracking-widest font-bold">
+                <div class="flex flex-col gap-2">
+                    <span class="opacity-40">Social</span>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="opacity-40">Visit</span>
+                    <span>102 Neocon St.</span>
+                    <span>Brooklyn, NY</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-24 pt-8 border-t border-white/10 text-[9px] opacity-30 flex justify-between">
+            <span>©2026 RED CLOVE DELI</span>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Parallax effect
+        gsap.to(".hero-bg-image", {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "section",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Smooth text reveal
+        gsap.from(".giant-text", {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out",
+            stagger: 0.1
+        });
+
+        // Image Scroll Effects for other images
+        gsap.utils.toArray(".reveal-box img").forEach(img => {
+            gsap.to(img, {
+                yPercent: 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    scrub: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

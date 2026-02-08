@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ – The Simple Bake Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg-light: #fffaf0;
+            --color-text-dark: #333333;
+            --color-accent: #d97706;
+            --color-card-bg: #ffffff;
+            --color-subtext: #6b7280;
+            --max-width: 900px;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: var(--color-bg-light);
+            margin: 0;
+            padding: 0;
+            color: var(--color-text-dark);
+            line-height: 1.7;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--color-accent);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+        }
+
+        .faq-card {
+            background-color: var(--color-card-bg);
+            padding: 1.75rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12),
+                        0 8px 12px -6px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .faq-card h3 {
+            margin: 0 0 0.5rem;
+            color: var(--color-accent);
+            font-size: 1.3rem;
+        }
+
+        .faq-card p {
+            margin: 0;
+            color: var(--color-subtext);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 1rem;
+            background-color: #3f2923;
+            color: white;
+        }
+
+        footer p {
+            color: #e7e5e4;
+            margin: 0.3rem 0;
+        }
+
+        .copyright {
+            color: #a1a1aa;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: var(--color-accent);
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>Frequently Asked Questions</header>
+
+    <div class="container">
+
+        <div class="faq-card">
+            <h3>Do you bake everything fresh daily?</h3>
+            <p>Yes! All breads, pastries, cookies, and sweets are baked fresh every morning.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Do you take custom cake orders?</h3>
+            <p>We offer seasonal cakes by the slice, but do not take custom cake orders at this time.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>What time should I come for the freshest items?</h3>
+            <p>We recommend stopping by between 7 AM and 10 AM for the best selection of breads and pastries.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Do you offer gluten-free options?</h3>
+            <p>We currently do not offer gluten-free baked goods, but we're working on recipes!</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Can I call ahead to reserve items?</h3>
+            <p>Yes! Give us a call in the morning and we'll gladly set aside items for you.</p>
+        </div>
+
+        <div class="faq-card">
+            <h3>Where are you located?</h3>
+            <p>We are located at 456 Main Street, Townsville, CA 12345.</p>
+        </div>
+
+    </div>
+
+<a href="index.html" class="back-link">← Back to Homepage</a>
+
+</body>
+</html>

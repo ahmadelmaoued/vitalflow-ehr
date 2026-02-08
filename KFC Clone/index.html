@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHICKEEZ | Fried Chicken</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --red:#E4000F;
+  --black:#000;
+  --white:#fff;
+  --soft:#f9f9f9;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:white;color:black;overflow-x:hidden;}
+
+/* NAVBAR */
+nav{
+  position:fixed;top:0;width:100%;height:70px;background:white;
+  display:flex;align-items:center;padding:0 50px;
+  z-index:1000;box-shadow:0 4px 15px rgba(0,0,0,.1);border-bottom:3px solid var(--red);
+}
+.logo{font-family:Anton,sans-serif;font-size:1.4rem;font-weight:900;color:black;}
+.logo span{color:var(--red);}
+.nav-links{display:flex;flex:1;justify-content:center;gap:30px;} /* tightened spacing */
+.nav-links a{text-decoration:none;font-weight:700;color:black;transition:.2s;}
+.nav-links a:hover{color:var(--red);}
+
+/* HERO */
+.hero{
+  padding:120px 50px 70px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;position:relative;overflow:hidden;
+}
+.stripe-bg{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,var(--red) 0 50px,var(--black) 50px 100px);
+  background-size:200px 100%;
+  animation:moveStripes 8s linear infinite;
+  z-index:-1;
+}
+@keyframes moveStripes{0%{background-position:0 0;}100%{background-position:200px 0;}}
+
+.hero-content h1{font-family:Anton;font-size:3.5rem;line-height:1;color:var(--white);text-shadow:2px 2px var(--black);}
+.hero-content h1 span{color:var(--red);}
+.hero-content p{margin:20px 0 30px;font-size:1.1rem;font-weight:600;color:white;text-shadow:1px 1px var(--black);}
+.hero-content a{display:inline-block;padding:20px 60px;background:var(--black);color:white;font-weight:900;text-decoration:none;border-radius:50px;font-size:1.1rem;transition:transform .2s;}
+.hero-content a:hover{transform:scale(1.05);}
+.hero img{width:100%;border-radius:20px;filter:drop-shadow(0 25px 40px rgba(0,0,0,.5));transition:transform .3s;}
+.hero img:hover{transform:scale(1.05);}
+
+/* SECTIONS */
+section{padding:60px 50px;}
+.section-title{font-family:Anton;font-size:1.8rem;margin-bottom:30px;color:var(--red);text-transform:uppercase;letter-spacing:1px;}
+
+/* MENU */
+.menu{display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+.card{background:var(--soft);border-radius:20px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.2);transition:transform .4s;}
+.card:hover{transform:scale(1.05);}
+.card img{width:100%;height:220px;object-fit:cover;transition:transform .4s;}
+.card img:hover{transform:scale(1.08);}
+.card-body{padding:16px;}
+.tag{font-size:.7rem;font-weight:900;letter-spacing:2px;color:var(--red);text-transform:uppercase;}
+.card h3{margin-top:6px;font-weight:900;font-size:1.2rem;}
+.price{margin-top:6px;font-weight:900;font-size:1.25rem;}
+.card button{margin-top:10px;padding:12px 30px;background:var(--red);color:white;border:none;border-radius:40px;font-weight:900;cursor:pointer;transition:.2s;}
+.card button:hover{transform:scale(1.05);}
+
+/* COMBOS */
+.combo{background:black;color:white;border-radius:22px;padding:25px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;transition:transform .3s;}
+.combo:hover{transform:scale(1.02);}
+.combo span{color:var(--red);font-weight:900;font-size:1.1rem;}
+.combo button{padding:12px 30px;background:var(--red);color:white;border:none;border-radius:40px;font-weight:900;cursor:pointer;transition:.2s;}
+.combo button:hover{transform:scale(1.05);}
+
+/* STORY */
+.story{background:var(--soft);border-radius:22px;padding:30px;line-height:1.6;font-size:1rem;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.1);text-align:center;}
+.story p{margin-bottom:10px;} /* extra spacing */
+
+/* CTA */
+.cta{background:var(--red);color:white;padding:70px 50px;text-align:center;}
+.cta h2{font-family:Anton;font-size:2.2rem;margin-bottom:25px;color:white;text-shadow:1px 1px var(--black);}
+.cta a{display:inline-block;padding:20px 60px;background:white;color:var(--red);font-weight:900;text-decoration:none;border-radius:50px;font-size:1.2rem;transition:transform .2s;}
+.cta a:hover{transform:scale(1.05);}
+
+/* PARTICLES */
+.particle-layer{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+.particle{position:absolute;width:12px;height:12px;border-radius:50%;opacity:.25;animation:float linear infinite;}
+.particle.red{background:var(--red);}
+.particle.yellow{background:#FFC300;}
+.particle.brown{background:#6b3e26;}
+@keyframes float{from{transform:translateY(120vh) rotate(0deg);}to{transform:translateY(-20vh) rotate(360deg);}}
+
+/* FOOTER */
+footer{padding:30px 50px;text-align:center;font-weight:600;color:#555;border-top:1px solid #eee;font-size:.9rem;}
+
+/* MOBILE */
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:30px;} nav{padding:0 20px;} section{padding:60px 20px;} footer{padding:20px 20px;}}
+</style>
+</head>
+<body>
+
+<div class="particle-layer" id="particles"></div>
+
+<nav>
+  <div class="logo">CHICK<span>EEZ</span></div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#story">About</a>
+    <a href="#cta">Order</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="stripe-bg"></div>
+  <div class="hero-content">
+    <h1>CRISPED<br><span>PERFECTION</span></h1>
+    <p>High-heat fried chicken engineered for crunch, juiciness, and flavor explosion.</p>
+    <a href="#menu">VIEW MENU</a>
+  </div>
+  <img src="bucket.jpg" alt="Crispy Chicken">
+</div>
+
+<section id="menu">
+  <h2 class="section-title">THE LINEUP</h2>
+  <div class="menu">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=1400" alt="tenders">
+      <div class="card-body">
+        <span class="tag">Signature</span>
+        <h3>CHICKEN TENDERS</h3>
+        <span class="price">$14.00</span>
+        <button onclick="window.open('https://wa.me/96170000000')">Order Now</button>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://easychickenrecipes.com/wp-content/uploads/2023/08/featured-buffalo-wings-recipe.jpg" alt="Crimson Wings">
+      <div class="card-body">
+        <span class="tag">Hot Drop</span>
+        <h3>CRIMSON WINGS</h3>
+        <span class="price">$12.50</span>
+        <button onclick="window.open('https://wa.me/96170000000')">Order Now</button>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=1400" alt="Boneless Strips">
+      <div class="card-body">
+        <span class="tag">Classic</span>
+        <h3>BONELESS STRIPS</h3>
+        <span class="price">$11.00</span>
+        <button onclick="window.open('https://wa.me/96170000000')">Order Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <h2 class="section-title">ABOUT</h2>
+  <div class="story">
+    <p>CHICKEEZ started with one simple goal: to create the crispiest, juiciest fried chicken that leaves a lasting impression. Every recipe is crafted with love, using high-quality ingredients, perfected cooking techniques, and bold flavors that keep our fans coming back for more.</p>
+    <p>From our signature Reign Burger to the fiery Crimson Wings, every menu item is designed to give you a mouthwatering experience. We believe that fried chicken is not just food—it’s an experience, a flavor adventure, and a joy that brings people together. At CHICKEEZ, every bite tells a story of passion, taste, and quality.</p>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <h2>READY TO ORDER?</h2>
+  <a href="https://wa.me/96170000000" target="_blank">ORDER VIA WHATSAPP</a>
+</section>
+
+<footer>CHICKEEZ 2025 &copy; All Rights Reserved</footer>
+
+<script>
+const particleLayer = document.getElementById("particles");
+for(let i=0;i<60;i++){
+  const p=document.createElement("div");
+  p.className="particle "+["red","yellow","brown"][Math.floor(Math.random()*3)];
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=10+Math.random()*15+"s";
+  p.style.animationDelay=Math.random()*-20+"s";
+  particleLayer.appendChild(p);
+}
+</script>
+
+</body>
+</html>

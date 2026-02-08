@@ -1,0 +1,764 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0b2e 25%, #16213e 50%, #0f0b28 75%, #0a0420 100%);
+            background-size: 400% 400%;
+            animation: galaxyShift 20s ease infinite;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Galaxy Background Color Animation */
+        @keyframes galaxyShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 75%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 25%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animated Stars Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stars-container::before,
+        .stars-container::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+            /* Layer 1: Small frequent stars */
+            radial-gradient(1px 1px at 25px 40px, white, transparent),
+            radial-gradient(1px 1px at 150px 180px, white, transparent),
+            radial-gradient(1.5px 1.5px at 280px 70px, rgba(255,255,255,0.8), transparent),
+            
+            /* Layer 2: Medium sparse stars */
+            radial-gradient(2px 2px at 50px 150px, white, transparent),
+            radial-gradient(2px 2px at 350px 450px, white, transparent),
+            
+            /* Layer 3: Distant faint "dust" */
+            radial-gradient(1px 1px at 100px 10px, rgba(255, 255, 255, 0.711), transparent),
+            radial-gradient(1px 1px at 400px 300px, rgba(255, 255, 255, 0.771), transparent);
+            /* Add this to the bottom of your background-image list */
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        .stars-container::after {
+            background-image: 
+                radial-gradient(1px 1px at 40px 60px, white, transparent),
+                radial-gradient(2px 2px at 110px 90px, white, transparent),
+                radial-gradient(1px 1px at 160px 120px, white, transparent);
+            animation: twinkle 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Spaceship Animation */
+        .spaceship {
+            position: fixed;
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(90deg, #888 0%, #ccc 50%, #888 100%);
+            clip-path: polygon(0 50%, 30% 0, 70% 0, 100% 50%, 70% 100%, 30% 100%);
+            top: 20%;
+            left: -50px;
+            animation: flySpaceship 15s linear infinite;
+            z-index: 2;
+        }
+
+        .spaceship::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, #ff6b35, transparent);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        @keyframes flySpaceship {
+            0% {
+                left: -50px;
+                top: 20%;
+            }
+            100% {
+                left: 110%;
+                top: 25%;
+            }
+        }
+
+        /* UFO Animations - Multiple UFOs with Wobble */
+        .ufo {
+            position: fixed;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
+            border-radius: 50% 50% 0 0;
+            z-index: 2;
+        }
+
+        .ufo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 18px;
+            background: linear-gradient(180deg, rgba(100, 200, 255, 0.4), rgba(80, 150, 200, 0.6));
+            border-radius: 50%;
+            border: 2px solid rgba(150, 200, 255, 0.3);
+        }
+
+        .ufo::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 15px;
+            background: radial-gradient(ellipse, rgba(100, 200, 255, 0.5), transparent);
+            filter: blur(4px);
+        }
+
+        /* Alien inside UFO */
+        .alien {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 14px;
+            z-index: 1;
+        }
+
+        .alien-head {
+            width: 12px;
+            height: 10px;
+            background: rgba(150, 255, 150, 0.8);
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+        }
+
+        .alien-eye {
+            position: absolute;
+            width: 3px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50%;
+            top: 3px;
+        }
+
+        .alien-eye.left {
+            left: 2px;
+        }
+
+        .alien-eye.right {
+            right: 2px;
+        }
+
+        .ufo1 {
+            top: 15%;
+            right: -80px;
+            animation: flyUFO1 25s linear infinite;
+        }
+
+        .ufo2 {
+            top: 45%;
+            left: -80px;
+            animation: flyUFO2 30s linear infinite;
+        }
+
+        .ufo3 {
+            top: 70%;
+            right: -80px;
+            animation: flyUFO3 28s linear infinite;
+        }
+
+        @keyframes flyUFO1 {
+            0% {
+                right: -80px;
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(-15px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            75% {
+                transform: translateY(-8px);
+            }
+            100% {
+                right: 110%;
+                transform: translateY(5px);
+            }
+        }
+
+        @keyframes flyUFO2 {
+            0% {
+                left: -80px;
+                transform: translateY(0);
+            }
+            20% {
+                transform: translateY(12px);
+            }
+            45% {
+                transform: translateY(-10px);
+            }
+            70% {
+                transform: translateY(8px);
+            }
+            100% {
+                left: 110%;
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes flyUFO3 {
+            0% {
+                right: -80px;
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-12px);
+            }
+            55% {
+                transform: translateY(15px);
+            }
+            80% {
+                transform: translateY(-7px);
+            }
+            100% {
+                right: 110%;
+                transform: translateY(0);
+            }
+        }
+
+        /* Background Planets */
+        .planets-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .planet1 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #9d4edd, #5a189a);
+            top: 12%;
+            left: 8%;
+            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.5),
+                        0 0 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .planet1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: rgba(199, 125, 255, 0.3);
+            top: 50%;
+            transform: translateY(-50%) rotateX(75deg);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+        }
+
+        .planet2 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 35% 35%, #ff6b35, #8b2500);
+            top: 60%;
+            right: 10%;
+            box-shadow: inset -8px -8px 15px rgba(0, 0, 0, 0.6),
+                        0 0 25px rgba(255, 107, 53, 0.3);
+            animation-delay: -5s;
+        }
+
+        .planet3 {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 40% 30%, #4cc9f0, #0077b6);
+            top: 35%;
+            left: 15%;
+            box-shadow: inset -6px -6px 12px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(76, 201, 240, 0.3);
+            animation-delay: -10s;
+        }
+
+        .planet4 {
+            width: 45px;
+            height: 45px;
+            background: radial-gradient(circle at 30% 30%, #ffd60a, #d4a41a);
+            top: 80%;
+            left: 25%;
+            box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.4),
+                        0 0 20px rgba(255, 214, 10, 0.3);
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+            50% {
+                transform: translateY(5px) rotate(-1deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(1deg);
+            }
+        }
+
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(138, 43, 226, 0.8);
+            border: 2px solid #9d4edd;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: rgba(157, 78, 221, 0.9);
+            transform: scale(1.05);
+        }
+
+        .menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Slide Navigation */
+        .slide-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 11, 46, 0.95), rgba(15, 11, 40, 0.95));
+            backdrop-filter: blur(10px);
+            border-left: 2px solid #9d4edd;
+            z-index: 999;
+            transition: right 0.4s ease;
+            padding-top: 80px;
+        }
+
+        .slide-nav.active {
+            right: 0;
+        }
+
+        .slide-nav ul {
+            list-style: none;
+        }
+
+        .slide-nav ul li {
+            margin: 0;
+        }
+
+        .slide-nav ul li a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px 30px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .slide-nav ul li a:hover {
+            background: rgba(157, 78, 221, 0.3);
+            border-left: 3px solid #9d4edd;
+            padding-left: 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #9d4edd, #c77dff, #e0aaff, #7b2cbf);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #e0aaff;
+            letter-spacing: 2px;
+        }
+
+        .hero-CTA {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background: #9d4edd;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero-CTA:hover {
+            background: #c77dff;
+            box-shadow: 0 8px 20px rgba(199, 125, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .hero-CTA:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(157, 78, 221, 0.3);
+        }
+
+        @keyframes gradientText {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #9d4edd, #e0aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-size: 28px;
+            color: #c77dff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: rgba(26, 11, 46, 0.6);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            border-color: #9d4edd;
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .menu-image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(192, 132, 252, 0.3));
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 2px dashed rgba(157, 78, 221, 0.5);
+        }
+
+        .menu-image-placeholder span {
+            color: #c77dff;
+            font-size: 18px;
+        }
+
+        .menu-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .item-name {
+            font-size: 20px;
+            color: #e0aaff;
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #b8b8b8;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .item-price {
+            font-size: 18px;
+            color: #9d4edd;
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: rgba(26, 11, 46, 0.6);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #d8d8d8;
+            margin-bottom: 20px;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .contact-item {
+            background: rgba(26, 11, 46, 0.6);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: #9d4edd;
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 36px;
+            color: #9d4edd;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            font-size: 20px;
+            color: #e0aaff;
+            margin-bottom: 10px;
+        }
+
+        .contact-item p {
+            font-size: 16px;
+            color: #d8d8d8;
+            line-height: 1.6;
+        }
+
+        .phone-link, .email-link, a {
+            color: #d8d8d8;
+            text-decoration: none;
+        }
+
+        .phone-link, .email-link, a:hover {
+            text-decoration: underline;
+        }
+
+        .phone-link, .email-link, a:active {
+            color: #9d4edd;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 599px) {
+            .menu-image-placeholder {
+                height: 200px;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 600px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-title {
+                font-size: 64px;
+            }
+            
+            .hero-subtitle {
+                font-size: 22px;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 900px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .contact-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .hero-title {
+                font-size: 80px;
+            }
+            
+            .section {
+                padding: 100px 40px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 4, 32, 0.9);
+            border-top: 2px solid rgba(157, 78, 221, 0.3);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .footer p {
+            color: #b8b8b8;
+            font-size: 14px;
+            margin: 0;
+        }

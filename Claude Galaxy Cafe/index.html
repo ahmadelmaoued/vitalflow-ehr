@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Cafe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="stars-container"></div>
+    <div class="planets-container">
+        <div class="planet planet1"></div>
+        <div class="planet planet2"></div>
+        <div class="planet planet3"></div>
+        <div class="planet planet4"></div>
+    </div>
+    <div class="spaceship"></div>
+    
+    <!-- Multiple UFOs with Aliens -->
+    <div class="ufo ufo1">
+        <div class="alien">
+            <div class="alien-head">
+                <div class="alien-eye left"></div>
+                <div class="alien-eye right"></div>
+            </div>
+        </div>
+    </div>
+    <div class="ufo ufo2">
+        <div class="alien">
+            <div class="alien-head">
+                <div class="alien-eye left"></div>
+                <div class="alien-eye right"></div>
+            </div>
+        </div>
+    </div>
+    <div class="ufo ufo3">
+        <div class="alien">
+            <div class="alien-head">
+                <div class="alien-eye left"></div>
+                <div class="alien-eye right"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Menu Button -->
+    <button class="menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Slide Navigation -->
+    <nav class="slide-nav" id="slideNav">
+        <ul>
+            <li><a href="#menu" class="nav-link">Menu</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#contact" class="nav-link">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">Galaxy Cafe</h1>
+        <p class="hero-subtitle">Where Every Sip is Out of This World</p>
+        <a href="#menu" class="hero-CTA">Fuel Your Morning</a>
+    </section>
+    
+    <!-- Menu Section -->
+    <section id="menu" class="section menu-section">
+        <h2 class="section-title">Our Menu</h2>
+        
+        <!-- Drinks Category -->
+        <div class="menu-category">
+            <h3 class="category-title">Cosmic Drinks</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                       <img src="images/nebula-latte.jpg" alt="Nebula Latte">
+                    </div>
+                    <h4 class="item-name">Nebula Latte</h4>
+                    <p class="item-description">Swirling colors of espresso and steamed milk</p>
+                    <p class="item-price">$5.50</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/stardust-smoothie.jpg" alt="Stardust Smoothie">
+                    </div>
+                    <h4 class="item-name">Stardust Smoothie</h4>
+                    <p class="item-description">Blended berries with cosmic sparkle</p>
+                    <p class="item-price">$6.00</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/blackhole-coffee.jpg" alt="Black Hole Coffee">
+                    </div>
+                    <h4 class="item-name">Black Hole Coffee</h4>
+                    <p class="item-description">Dark roast that pulls you in</p>
+                    <p class="item-price">$4.50</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Food Category -->
+        <div class="menu-category">
+            <h3 class="category-title">Stellar Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                         <img src="images/meteor-burger.jpg" alt="Meteor Burger">
+                    </div>
+                    <h4 class="item-name">Meteor Burger</h4>
+                    <p class="item-description">Grilled burger with cosmic flavor</p>
+                    <p class="item-price">$7.50</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/asteroid-salad.jpg" alt="Asteroid Salad">
+                    </div>
+                    <h4 class="item-name">Asteroid Salad</h4>
+                    <p class="item-description">Fresh greens from across the galaxy</p>
+                    <p class="item-price">$6.50</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/cosmic-bagel.jpg" alt="Cosmic Bagel">
+                    </div>
+                    <h4 class="item-name">Cosmic Bagel</h4>
+                    <p class="item-description">Toasted with your choice of spread</p>
+                    <p class="item-price">$5.00</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Desserts Category -->
+        <div class="menu-category">
+            <h3 class="category-title">Celestial Desserts</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                          <img src="images/galaxy-cake.jpg" alt="Galaxy Cake">
+                    </div>
+                    <h4 class="item-name">Galaxy Cake</h4>
+                    <p class="item-description">Layered with cosmic swirls</p>
+                    <p class="item-price">$6.50</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/moonlight-cookie.jpg" alt="Moonlight Cookie">
+                    </div>
+                    <h4 class="item-name">Moonlight Cookie</h4>
+                    <p class="item-description">Soft and glowing with flavor</p>
+                    <p class="item-price">$3.50</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image-placeholder">
+                        <img src="images/star-brownie.jpg" alt="Star Brownie">
+                    </div>
+                    <h4 class="item-name">Star Brownie</h4>
+                    <p class="item-description">Rich chocolate from distant worlds</p>
+                    <p class="item-price">$4.50</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <h2 class="section-title">About Galaxy Cafe</h2>
+        <div class="about-content">
+            <p>Welcome to Galaxy Cafe, where we bring the wonders of the cosmos to your cup. Founded in the heart of the city, our cafe is more than just a place to grab coffee - it's an experience that transports you to the far reaches of space.</p>
+            
+            <p>Every drink we craft is inspired by the beauty of nebulas, the mystery of black holes, and the infinite possibilities of the universe. Our skilled baristas are like astronauts, exploring new flavor combinations and creating beverages that are truly out of this world.</p>
+            
+            <p>We believe that great coffee should be an adventure. That's why we source our beans from the finest cosmic corners of Earth and prepare each drink with care, precision, and a touch of stardust.</p>
+            
+            <p>Whether you're a space enthusiast, a coffee lover, or just looking for a unique atmosphere to relax, Galaxy Cafe welcomes you aboard our interstellar journey.</p>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-content">
+            <div class="contact-item">
+                <span class="contact-icon">&#9742;</span>
+                <h3>Phone</h3>
+                <span class="phone-link"><a href="tel:+1-800-123-4567">+1 (800) 123-4567</a></span>
+            </div>
+            
+            <div class="contact-item">
+                <span class="contact-icon">&#9993;</span>
+                <h3>Email</h3>
+                <span class="email-link"><a href="mailto:hello@galaxycafe.com" target="_blank">hello@galaxycafe.com</a></span>
+            </div>
+            
+            <div class="contact-item">
+                <span class="contact-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="#9d4edd"/>
+                    </svg>
+                </span>
+                <h3>Location</h3>
+                <p>123 Nebula Street<br>Cosmos City, CC 12345</p>
+            </div>
+            
+            <div class="contact-item">
+                <span class="contact-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="#9d4edd" stroke-width="2"/>
+                        <path d="M12 7V12L15 15" stroke="#9d4edd" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <h3>Hours</h3>
+                <p>Mon - Fri: 7am - 8pm<br>Sat - Sun: 8am - 9pm</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Galaxy Cafe. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Get elements
+        const menuBtn = document.getElementById('menuBtn');
+        const slideNav = document.getElementById('slideNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Toggle menu open/close
+        menuBtn.addEventListener('click', function() {
+            menuBtn.classList.toggle('active');
+            slideNav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a navigation link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuBtn.classList.remove('active');
+                slideNav.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInside = slideNav.contains(event.target) || menuBtn.contains(event.target);
+            
+            if (!isClickInside && slideNav.classList.contains('active')) {
+                menuBtn.classList.remove('active');
+                slideNav.classList.remove('active');
+            }
+        });
+
+        // Add fade-in animation to menu items when scrolling
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all menu items and contact items
+        const menuItems = document.querySelectorAll('.menu-item');
+        const contactItems = document.querySelectorAll('.contact-item');
+
+        menuItems.forEach(item => observer.observe(item));
+        contactItems.forEach(item => observer.observe(item));
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakesome | Our Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-mint: #66D2C8;
+    --primary-pink: #F8AEC9;
+    --deep-teal: #1D6B63;
+    --ombre-gradient: linear-gradient(135deg, #A8D8EA, #F8AEC9);
+    --white-glass: rgba(255, 255, 255, 0.85);
+    --ombre: linear-gradient(45deg, #66D2C8, #F8AEC9);
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #e0f7f5 0%, #fce4ec 100%);
+    background-attachment: fixed;
+    color: #333;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- Nav --- */
+.nav-bar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 75px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+.nav-logo { 
+    font-family: 'Dancing Script', cursive; 
+    font-size: 2.5rem; 
+    background: var(--ombre-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700; 
+}
+.cart-toggle-btn {
+    background: var(--ombre); color: white; border: none;
+    padding: 12px 24px; border-radius: 50px; font-weight: 900;
+    cursor: pointer; display: flex; align-items: center; gap: 10px; 
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(102, 210, 200, 0.3);
+}
+.cart-toggle-btn:active { transform: scale(0.95); }
+
+/* --- Header & Filters --- */
+header { text-align: center; padding: 140px 20px 10px; }
+h1.main-title { 
+    font-family: 'Dancing Script', cursive; 
+    font-size: 4.5rem; 
+    background: var(--ombre-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px; 
+}
+.filters-wrapper { 
+    width: 100%; 
+    overflow: hidden; 
+    margin-bottom: 15px;
+    position: relative;
+}
+.filters { 
+    display: flex; 
+    gap: 12px; 
+    padding: 0 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+.filters::-webkit-scrollbar { display: none; } 
+.filter-btn {
+    background: white; 
+    border: 1px solid #eee; 
+    padding: 10px 28px; 
+    border-radius: 50px;
+    font-weight: 700; 
+    color: #A8D8EA;
+    cursor: pointer; 
+    transition: var(--transition);
+    white-space: nowrap; 
+    flex-shrink: 0;
+}
+.filter-btn.active { 
+    background: var(--ombre-gradient); 
+    color: white; 
+    border-color: transparent;
+    transform: translateY(-2px); 
+}
+
+/* --- Instagram Link --- */
+.insta-wrapper { display: flex; justify-content: center; margin-bottom: 35px; }
+.insta-text-link {
+    text-decoration: none; 
+    background: var(--ombre-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 6px; font-size: 1rem;
+    opacity: 0.8; transition: var(--transition); cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.insta-text-link img { width: 18px; height: 18px; filter: grayscale(0.2); }
+.insta-text-link:hover { opacity: 1; transform: translateY(-1px); }
+
+/* --- Menu Grid --- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+.card {
+    background: var(--white-glass); backdrop-filter: blur(10px);
+    border-radius: 30px; padding: 25px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.7); transition: var(--transition);
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+
+.card-img-container {
+    width: 100%; aspect-ratio: 1; background: #fff5f8; border-radius: 25px;
+    margin-bottom: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.card-img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+.card-img-placeholder-text {
+    color: var(--primary-pink); font-weight: 900; font-size: 1.1rem;
+    text-transform: uppercase; padding: 10px;
+}
+
+.item-desc {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 8px;
+    line-height: 1.4;
+    padding: 0 5px;
+}
+
+.size-toggle {
+    display: flex; gap: 10px; margin-top: 15px; justify-content: center;
+    background: rgba(255, 255, 255, 0.5); 
+    padding: 6px; 
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+.size-btn {
+    flex: 1; padding: 10px 16px; border-radius: 16px; border: none;
+    background: transparent; font-weight: 700; cursor: pointer; transition: var(--transition);
+    font-size: 0.85rem; color: #999;
+}
+.size-btn.active {
+    background: var(--ombre-gradient); 
+    color: white; 
+    box-shadow: 0 4px 12px rgba(168, 216, 234, 0.3);
+    transform: translateY(-1px);
+}
+.add-btn {
+    background: var(--ombre-gradient); color: white; border: none;
+    padding: 14px; border-radius: 18px; width: 100%; cursor: pointer;
+    font-weight: 700; margin-top: 15px; transition: var(--transition);
+}
+.add-btn:active { transform: scale(0.96); }
+
+/* --- Sidebar Cart --- */
+.sidebar {
+    position: fixed; right: -100%; top: 0; width: 95%; max-width: 440px;
+    height: 100vh; background: white; z-index: 2000; padding: 40px 30px;
+    box-shadow: -20px 0 60px rgba(0,0,0,0.1); 
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex; flex-direction: column;
+}
+.sidebar.active { transform: translateX(-100%); }
+.cart-list { flex-grow: 1; overflow-y: auto; margin: 30px 0; scroll-behavior: smooth; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; transition: var(--transition); }
+
+.qty-btn { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--ombre); color: white; font-weight: 900; cursor: pointer; transition: var(--transition); }
+.remove-btn { background: #ff4757; color: white; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 900; cursor: pointer; margin-left: 10px; transition: var(--transition); }
+
+.whatsapp-btn { 
+    background: #25D366; color: white; border: none; width: 100%; padding: 18px; 
+    border-radius: 20px; font-size: 1.2rem; font-weight: 900; cursor: pointer; 
+    margin-top: 20px; transition: var(--transition); 
+}
+.whatsapp-btn:hover { filter: brightness(1.05); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
+
+/* --- Modals --- */
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); backdrop-filter: blur(8px); display: none; z-index: 1500; transition: opacity 0.4s ease; }
+.custom-modal {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%);
+    opacity: 0; visibility: hidden;
+    background: white; padding: 40px; border-radius: 40px; z-index: 3000;
+    text-align: center; width: 90%; max-width: 400px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2); 
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.custom-modal.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
+
+.sprinkle { position: fixed; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; z-index: 9999; }
+.clear-cart-btn { background: none; border: none; color: #bbb; text-decoration: underline; cursor: pointer; font-size: 0.8rem; margin-top: 15px; width: 100%; transition: 0.3s; }
+.clear-cart-btn:hover { color: #ff4757; }
+
+/* --- Footer --- */
+.footer {
+    padding: 60px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+.footer h2 {
+    font-family: 'Dancing Script', cursive;
+    background: var(--ombre-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.opening-hours {
+    max-width: 300px;
+    margin: 0 auto;
+    font-weight: 700;
+    color: #444;
+    line-height: 1.8;
+}
+.opening-hours div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(29, 107, 99, 0.2);
+    padding: 5px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="modal-overlay" style="z-index: 2900;" onclick="closeModal()"></div>
+<div class="custom-modal" id="cute-modal">
+    <div style="font-size:3.5rem; margin-bottom:15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">🍪</div>
+    <h2 style="background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family:'Dancing Script'; font-size:2.8rem; margin-bottom:10px;">Wait!</h2>
+    <p id="modal-text" style="font-weight:500; color:#555; line-height:1.5; font-size:1.1rem;"></p>
+    <button class="add-btn" style="width: auto; padding: 12px 35px; border-radius: 50px;" onclick="closeModal()">Keep Shopping</button>
+</div>
+
+<div class="nav-bar">
+    <div class="nav-logo">Bakesome</div>
+    <button class="cart-toggle-btn" id="cart-pill" onclick="toggleCart()">
+        MY ORDER <span id="badge-count" style="background:white; color:#A8D8EA; padding:2px 10px; border-radius:50px; margin-left:5px; font-weight:900;">0</span>
+    </button>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+<header>
+    <h1 class="main-title">Our Menu</h1>
+    <div class="filters-wrapper">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterMenu('all', this)">All</button>
+            <button class="filter-btn" onclick="filterMenu('chocolate-boxes', this)">Chocolate Boxes</button>
+            <button class="filter-btn" onclick="filterMenu('chocolate-bars', this)">Chocolate Bars</button>
+            <button class="filter-btn" onclick="filterMenu('cookies', this)">Cookies</button>
+            <button class="filter-btn" onclick="filterMenu('brownies', this)">Brownies</button>
+            <button class="filter-btn" onclick="filterMenu('cinnamon-rolls', this)">Cinnamon Rolls</button>
+            <button class="filter-btn" onclick="filterMenu('per-serving', this)">Per Serving</button>
+            <button class="filter-btn" onclick="filterMenu('new-cookies', this)">New Cookies (Limited)</button>
+            <button class="filter-btn" onclick="filterMenu('brooki-limited', this)">Brooki (Limited)</button>
+            <button class="filter-btn" onclick="filterMenu('mini-profiteroles', this)">Mini Profiteroles (Limited)</button>
+        </div>
+    </div>
+    
+    <div class="insta-wrapper">
+        <a class="insta-text-link" onclick="openInstagram()">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+            @bakesome.lb
+        </a>
+    </div>
+</header>
+
+<main class="container">
+    <div class="menu-grid" id="menu-grid"></div>
+</main>
+
+<footer class="footer">
+    <h2>Opening Times</h2>
+    <div class="opening-hours">
+        <div><span>Monday - Saturday</span> <span>10:00 AM - 7:00 PM</span></div>
+        <div><span>Sunday</span> <span>10:00 AM - 2:00 PM</span></div>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.9rem; background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.6;">&copy; 2026 Bakesome</p>
+</footer>
+
+<div class="sidebar" id="sidebar">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; font-size: 2rem;">Your Order</h2>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size:2rem; color: #ccc;">✕</span>
+    </div>
+    <div class="cart-list" id="cart-list"></div>
+    <div style="padding-top: 20px; border-top: 2px solid #eee;">
+        <div style="display:flex; justify-content:space-between; font-size:1.8rem; font-weight:900; background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <span>Total</span>
+            <span id="total-price">$0.00</span>
+        </div>
+        <button class="whatsapp-btn" onclick="checkout()">WhatsApp Checkout</button>
+        <button class="clear-cart-btn" onclick="clearCart()">Clear Order</button>
+    </div>
+</div>
+
+<script>
+/** * PLACEHOLDER INSTRUCTIONS:
+ * Rename your local images on your laptop to match the 'imgFile' names below.
+ * Put them in the same folder as this HTML file. 
+ */
+const menuItems = [
+    { name:"Small Chocolate Box (12 Pieces)", price:14, cat:"chocolate-boxes", imgFile: "small-box.jpg", label: "Small Choco Box", desc: "Filling of your choice (Bueno Spread, Pistachio, Lotus, Caramel)" },
+    { name:"Big Chocolate Box (29 Pieces)", price:32, cat:"chocolate-boxes", imgFile: "big-box.jpg", label: "Big Choco Box", desc: "Filling of your choice (Bueno Spread, Pistachio, Lotus, Caramel)" },
+    { name:"Dubai Chocolate", price:8.5, cat:"chocolate-bars", imgFile: "dubai-bar.jpg", label: "Dubai Bar", desc: "Crisp kataifi filled with pistachio, coated in rich Belgian chocolate." },
+    { name:"Caramel Chocolate", price:7, cat:"chocolate-bars", imgFile: "caramel-bar.jpg", label: "Caramel Bar", desc: "" },
+    { name:"Lotus Chocolate", price:8, cat:"chocolate-bars", imgFile: "lotus-bar.jpg", label: "Lotus Bar", desc: "Lotus-filled chocolate bar." },
+    
+    { name:"Chocolate Chip Cookie", price:3.5, boxPrice:13.5, cat:"cookies", hasSize: true, imgFile: "choco-chip.jpg", label: "Choco Chip", desc: "Classic chocolate chip cookie loaded with rich chocolate chips." },
+    { name:"Nutella Cookie", price:3.5, boxPrice:13.5, cat:"cookies", hasSize: true, imgFile: "nutella-cookie.jpg", label: "Nutella Cookie", desc: "" },
+    { name:"Kinder Bueno Cookie", price:3.5, boxPrice:13.5, cat:"cookies", hasSize: true, imgFile: "bueno-cookie.jpg", label: "Bueno Cookie", desc: "Cookie filled with Bueno spread and topped with a crunchy Kinder piece." },
+    { name:"Lotus Cookie", price:3.5, boxPrice:13.5, cat:"cookies", hasSize: true, imgFile: "lotus-cookie.jpg", label: "Lotus Cookie", desc: "White chocolate chip cookie filled with lotus spread and biscoff biscuit." },
+    { name:"Pistachio Cookie", price:3.5, boxPrice:13.5, cat:"cookies", hasSize: true, imgFile: "pistachio-cookie.jpg", label: "Pistachio Cookie", desc: "Pistachio cookie topped with crunchy pistachios." },
+    
+    { name:"Plain Brownie", price:3.5, cat:"brownies", imgFile: "plain-brownie.jpg", label: "Plain Brownie", desc: "Rich, fudgy chocolate brownie." },
+    { name:"Chocolate Brownie", price:4, cat:"brownies", imgFile: "choco-brownie.jpg", label: "Choco Brownie", desc: "Brownie topped with melted Belgian chocolate." },
+    { name:"Dubai Chocolate Brownie", price:5, cat:"brownies", imgFile: "dubai-brownie.jpg", label: "Dubai Brownie", desc: "Fudgy brownie with a crunchy kataifi pistachio center, coated in Belgian chocolate." },
+    { name:"Cinnamon Roll", price:5, cat:"cinnamon-rolls", imgFile: "cinnamon-roll.jpg", label: "Cinn. Roll", desc: "Soft, fluffy rolls filled with cinnamon sugar and topped with creamy vanilla glaze." },
+    { name:"Chocolate Cinnamon Roll", price:5.5, cat:"cinnamon-rolls", imgFile: "choco-roll.jpg", label: "Choco Cinn. Roll", desc: "" },
+    
+    { name:"Tiramisu", price:5, cat:"per-serving", imgFile: "tiramisu.jpg", label: "Tiramisu", desc: "Espresso soaked ladyfingers- smooth mascarpone cream topped with cacao powder." },
+    { name:"Fraiser", price:5, cat:"per-serving", imgFile: "fraiser.jpg", label: "Fraiser", desc: "Vanilla sponge soaked, layer of pastry cream, whipped cream, and fresh strawberries." },
+    { name:"Chocolate Crunch Cake", price:5.5, cat:"per-serving", imgFile: "crunch-cake.jpg", label: "Crunch Cake", desc: "Chocolate cake layered with mousse and crispy flakes blended in Belgian chocolate." },
+    { name:"Chocolate Mousse Cake", price:5, cat:"per-serving", imgFile: "mousse-cake.jpg", label: "Mousse Cake", desc: "Chocolate cake layered with rich chocolate mousse and topped with smooth ganache." },
+    
+    { name:"Cinnamon Roll Cookie", price:4.5, cat:"new-cookies", imgFile: "cinn-cookie.jpg", label: "Cinn. Cookie", desc: "Cinnamon roll cookie with a soft center, swirled with cinnamon sugar, and topped with a light glaze. Warm, sweet, and cozy in every bite" },
+    { name:"S'mores Cookie", price:4.5, cat:"new-cookies", imgFile: "smores-cookie.jpg", label: "S'mores Cookie", desc: "A gooey treat with warm marshmallow and rich Hershey’s chocolate, all baked into a soft cookie!" },
+    { name:"Lemon Glaze Cookie", price:4.5, cat:"new-cookies", imgFile: "lemon-cookie.jpg", label: "Lemon Cookie", desc: "Soft lemon cookie topped with a zesty glaze — light, fresh, and full of flavor." },
+    { name:"Double Chocolate Chip Cookie", price:4.5, cat:"new-cookies", hasSize: true, imgFile: "double-choco.jpg", label: "Double Choco", desc: "Rich chocolate chip cookie filled with chocolate spread and chocolate chips (Optional fresh strawberry center)." },
+    { name:"Brooki", price:2.75, cat:"brooki-limited", imgFile: "brooki.jpg", label: "Brooki", desc: "A mix of brownie and cookie — soft, fudgy, and rich on the inside with a perfectly crisp edge. The ultimate treat for chocolate lovers!" },
+    
+    { name:"Mini Profiteroles Box of 6", price:5, cat:"mini-profiteroles", imgFile: "profiteroles-6.jpg", label: "Profiteroles x6", desc: "" },
+    { name:"Mini Profiteroles Box of 9", price:8, cat:"mini-profiteroles", imgFile: "profiteroles-9.jpg", label: "Profiteroles x9", desc: "" }
+];
+
+let cart = {};
+
+function renderMenu(filter="all") {
+    const grid = document.getElementById('menu-grid');
+    grid.innerHTML = '';
+    const items = filter === 'all' ? menuItems : menuItems.filter(i => i.cat === filter);
+    
+    items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.05}s`;
+        card.style.opacity = '0';
+        
+        const sizeToggle = item.hasSize ? `
+            <div class="size-toggle">
+                <button class="size-btn active" data-size="single" data-price="${item.price}">1 Cookie</button>
+                <button class="size-btn" data-size="box" data-price="${item.boxPrice}">Box of 4</button>
+            </div>
+        ` : '';
+        
+        const displayPrice = item.hasSize ? item.price : item.price;
+        
+        card.innerHTML = `
+            <div>
+                <div class="card-img-container">
+                    <img src="images/${item.imgFile}" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="card-img-placeholder-text" style="display:none;">${item.label}</div>
+                </div>
+                <h3 style="background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${item.name}</h3>
+                <p class="item-desc">${item.desc}</p>
+            </div>
+            <div>
+                <div class="item-price" style="font-weight:900; font-size:1.5rem; margin-top:15px; color:var(--primary-pink)">$${displayPrice.toFixed(2)}</div>
+                ${sizeToggle}
+                <button class="add-btn" data-item-name="${item.name}" data-current-price="${displayPrice}">Add to Order</button>
+            </div>`;
+        grid.appendChild(card);
+        
+        if (item.hasSize) {
+            const sizeButtons = card.querySelectorAll('.size-btn');
+            const priceDisplay = card.querySelector('.item-price');
+            const addBtn = card.querySelector('.add-btn');
+            
+            sizeButtons.forEach(btn => {
+                btn.onclick = () => {
+                    sizeButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const newPrice = parseFloat(btn.dataset.price);
+                    priceDisplay.textContent = `$${newPrice.toFixed(2)}`;
+                    addBtn.dataset.currentPrice = newPrice;
+                };
+            });
+        }
+        
+        card.querySelector('.add-btn').onclick = (e) => {
+            const btn = e.currentTarget;
+            const itemName = btn.dataset.itemName;
+            const currentPrice = parseFloat(btn.dataset.currentPrice);
+            let finalName = itemName;
+            if (item.hasSize) {
+                const activeSize = card.querySelector('.size-btn.active').dataset.size;
+                finalName = activeSize === 'box' ? `${itemName} (Box of 4)` : itemName;
+            }
+            handleAddToCart(finalName, currentPrice, e);
+        };
+    });
+}
+
+function handleAddToCart(name, price, event) {
+    const btn = event.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const cartBtn = document.getElementById('cart-pill').getBoundingClientRect();
+    const colors = ['#F8AEC9', '#66D2C8', '#FF69B4', '#00CED1'];
+
+    for(let i=0; i<25; i++) {
+        const s = document.createElement('div');
+        s.className = 'sprinkle';
+        s.style.background = colors[Math.floor(Math.random() * colors.length)];
+        const startX = rect.left + rect.width / 2;
+        const startY = rect.top + rect.height / 2;
+        s.style.left = startX + 'px';
+        s.style.top = startY + 'px';
+        document.body.appendChild(s);
+        const targetX = cartBtn.left + (cartBtn.width/2) - startX;
+        const targetY = cartBtn.top + (cartBtn.height/2) - startY;
+        s.animate([
+            { transform: 'translate(0, 0) scale(0)', opacity: 0 },
+            { transform: `translate(${(Math.random()-0.5)*150}px, ${(Math.random()-0.5)*150}px) scale(1)`, opacity: 1, offset: 0.2 },
+            { transform: `translate(${targetX}px, ${targetY}px) scale(0)`, opacity: 0 }
+        ], { duration: 1000, easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)' }).onfinish = () => s.remove();
+    }
+    cart[name] = cart[name] ? { ...cart[name], qty: cart[name].qty + 1 } : { price, qty: 1 };
+    updateUI();
+}
+
+function updateQty(name, delta) {
+    cart[name].qty += delta;
+    if(cart[name].qty <= 0) delete cart[name];
+    updateUI();
+}
+
+function clearCart() {
+    cart = {};
+    updateUI();
+}
+
+function updateUI() {
+    const list = document.getElementById('cart-list');
+    const badge = document.getElementById('badge-count');
+    const totalDisp = document.getElementById('total-price');
+    list.innerHTML = '';
+    let total = 0, count = 0;
+    for (const [name, data] of Object.entries(cart)) {
+        total += data.price * data.qty;
+        count += data.qty;
+        list.innerHTML += `
+            <div class="cart-item">
+                <div>
+                    <div style="font-weight:700; background: var(--ombre-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${name}</div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:5px;">
+                        <button class="qty-btn" onclick="updateQty('${name}', -1)">−</button>
+                        <span style="font-weight:900;">${data.qty}</span>
+                        <button class="qty-btn" onclick="updateQty('${name}', 1)">+</button>
+                        <button class="remove-btn" onclick="updateQty('${name}', -${data.qty})">✕</button>
+                    </div>
+                </div>
+                <div style="font-weight:900;">$${(data.price * data.qty).toFixed(2)}</div>
+            </div>`;
+    }
+    badge.innerText = count;
+    totalDisp.innerText = `$${total.toFixed(2)}`;
+}
+
+function toggleCart() {
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('overlay');
+    sb.classList.toggle('active');
+    ov.style.display = sb.classList.contains('active') ? 'block' : 'none';
+}
+
+function filterMenu(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filtersContainer = document.querySelector('.filters');
+    const btnRect = btn.getBoundingClientRect();
+    const containerRect = filtersContainer.getBoundingClientRect();
+    const scrollLeft = filtersContainer.scrollLeft;
+    const btnCenter = btnRect.left - containerRect.left + scrollLeft + (btnRect.width / 2);
+    const containerCenter = containerRect.width / 2;
+    filtersContainer.scrollTo({ left: btnCenter - containerCenter, behavior: 'smooth' });
+    renderMenu(cat);
+}
+
+function showCuteModal(text) {
+    document.getElementById('modal-text').innerText = text;
+    document.getElementById('cute-modal').classList.add('active');
+    document.getElementById('modal-overlay').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('cute-modal').classList.remove('active');
+    document.getElementById('modal-overlay').style.display = 'none';
+}
+
+function checkout() {
+    let currentTotal = 0;
+    for (const name in cart) currentTotal += cart[name].price * cart[name].qty;
+    if(currentTotal === 0) {
+        showCuteModal("Your order is empty! Add some sweet treats to get started.");
+        return;
+    }
+    let msg = "Hello Bakesome! 🍪 I'd like to place an order:\n\n";
+    for(const [name, data] of Object.entries(cart)) msg += `• ${name} (x${data.qty})\n`;
+    msg += `\nTotal: $${currentTotal.toFixed(2)}`;
+    const phone = "96178715212";
+    window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+}
+
+function openInstagram() {
+    const appUrl = "instagram://user?username=bakesome.lb";
+    const webUrl = "https://www.instagram.com/bakesome.lb";
+    window.location.href = appUrl;
+    setTimeout(() => { if (document.hasFocus()) window.location.href = webUrl; }, 600);
+}
+
+document.write('<style>@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }</style>');
+renderMenu();
+</script>
+</body>
+</html>
+
+
+

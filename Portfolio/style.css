@@ -1,0 +1,67 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: blueviolet;
+    color: rgb(246, 246, 247);
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: darkviolet;
+    padding: 1rem;
+    text-align: center;
+}
+main {
+    padding: 2rem;
+}
+footer {
+    background-color: blueviolet;
+    padding: 1rem;
+    text-align: center;
+}
+.contact a {
+    color: rgb(241, 167, 200);
+    text-decoration: underline;
+}
+.button {
+    text-align: center;
+    margin: 120px;
+    padding: 20px;
+    background-color: rgb(229, 27, 27);
+    border: none;
+    height: 20px;
+    width: 40px;
+    cursor: pointer;
+}
+.project {
+    background-color: rgb(11, 159, 83);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1rem solid blue;
+    border-radius: 200px;
+    align-items: center;
+    align-self: auto;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+.text {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}

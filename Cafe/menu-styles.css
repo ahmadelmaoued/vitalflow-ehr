@@ -1,0 +1,83 @@
+/* Menu Page Styles */
+<!--This entire file iwas vibe coded by me-->
+.menu-section {
+    padding: 40px 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu-section h2 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.menu-card:hover {transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.menu-card h3 {
+    font-size: 1.3em;
+    margin: 15px 10px 8px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 8px 10px;
+    line-height: 1.4;
+}
+
+.menu-card .price {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #ff6b6b;
+    margin: 15px 0 10px;
+}
+
+header nav {
+    margin-top: 12px;
+    }
+
+header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: opacity 0.3s ease;
+    font-weight: 500;
+}
+
+header nav a:hover {
+    opacity: 0.8;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu – The Simple Bake Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg-light: #fffaf0;
+            --color-text-dark: #333333;
+            --color-accent: #d97706;
+            --color-card-bg: #ffffff;
+            --color-subtext: #000000;
+            --max-width: 800px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            color: var(--color-accent);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .item-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .item-card {
+            background-color: var(--color-card-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 12px 18px -6px rgba(0, 0, 0, 0.08),
+                        0 6px 10px -4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 25px -6px rgba(0, 0, 0, 0.12);
+        }
+
+        .item-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-card p {
+            color: var(--color-subtext);
+            margin-bottom: 0.75rem;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: var(--color-accent);
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>The Simple Bake Shop</header>
+
+    <div class="container">
+
+        <!-- BREAD SECTION -->
+        <h2 class="section-title">Our Fresh Breads</h2>
+
+        <div class="item-grid">
+
+            <div class="item-card">
+                <h3>Sourdough Loaf</h3>
+                <p>A rustic, tangy loaf with a crispy crust and soft interior. Naturally fermented for 24 hours.</p>
+                <p class="price">$6.50</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Classic Baguette</h3>
+                <p>Golden, airy, and perfectly crisp. Wonderful with butter or alongside a warm meal.</p>
+                <p class="price">$3.75</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Whole Wheat Loaf</h3>
+                <p>A hearty everyday bread made with stone-ground whole wheat flour.</p>
+                <p class="price">$5.00</p>
+            </div>
+
+        </div>
+
+        <!-- PASTRIES SECTION -->
+        <h2 class="section-title">Our Morning Pastries</h2>
+
+        <div class="item-grid">
+
+            <div class="item-card">
+                <h3>Butter Croissant</h3>
+                <p>Flaky, golden, and buttery with a soft layered interior. A classic morning favorite.</p>
+                <p class="price">$3.25</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Fresh Muffins</h3>
+                <p>Baked each morning in rotating flavors including blueberry, chocolate chip, and banana nut.</p>
+                <p class="price">$2.75</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Cinnamon Roll</h3>
+                <p>Soft, sweet dough rolled with cinnamon sugar and topped with vanilla icing.</p>
+                <p class="price">$3.95</p>
+            </div>
+
+        </div>
+
+        <!-- SWEETS SECTION -->
+        <h2 class="section-title">Our Delicious Sweets</h2>
+
+        <div class="item-grid">
+
+            <div class="item-card">
+                <h3>Chocolate Chip Cookies</h3>
+                <p>Soft, chewy, and packed with melted chocolate chips. A classic treat everyone loves.</p>
+                <p class="price">$1.50 each</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Fudgy Brownies</h3>
+                <p>Rich, dense brownies with a gooey center and deep chocolate flavor.</p>
+                <p class="price">$2.50</p>
+            </div>
+
+            <div class="item-card">
+                <h3>Seasonal Cake Slices</h3>
+                <p>Rotating flavors such as pumpkin spice, lemon berry, or chocolate velvet.</p>
+                <p class="price">$4.50</p>
+            </div>
+
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Homepage</a>
+    </div>
+
+</body>
+</html>

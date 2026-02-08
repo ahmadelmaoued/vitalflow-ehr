@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SUPERBOWL | Expert Bowl Builder</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --primary: #ff4d4d;
+            --secondary: #ff9f43;
+            --bg: #050505;
+            --border: rgba(255,255,255,.08);
+            --card: rgba(255,255,255,.03);
+            --glass: rgba(255,255,255,.05);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 50% -20%, #2d1b1b, #050505);
+            color: white;
+            padding-bottom: 140px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Premium Header */
+        header {
+            position: sticky; top: 0; padding: 25px 20px;
+            background: rgba(5,5,5,.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); text-align: center; z-index: 100;
+        }
+
+        .logo { 
+            font-weight: 800; letter-spacing: 4px; color: var(--primary); 
+            font-size: 1.4rem; cursor: pointer; user-select: none;
+        }
+
+        /* Progress Bar */
+        .xp-track { height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; max-width: 200px; margin-inline: auto; overflow: hidden; }
+        .xp-fill { height: 100%; width: 33%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: 0.5s ease; box-shadow: 0 0 15px var(--primary); }
+
+        /* Stages */
+        .stage { display: none; padding: 30px 20px; max-width: 500px; margin: auto; animation: slideUp 0.4s ease-out; }
+        .stage.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { font-size: 2rem; margin: 0 0 8px; font-weight: 800; text-align: center; }
+        .sub { text-align: center; color: #888; margin-bottom: 35px; font-size: 0.95rem; }
+
+        /* Accurate Cards */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 28px; padding: 30px 15px; text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; cursor: pointer;
+        }
+
+        .card:active { transform: scale(0.95); }
+        
+        .card.selected {
+            border-color: var(--primary); background: rgba(255, 77, 77, 0.1);
+            transform: translateY(-8px); box-shadow: 0 15px 30px rgba(255, 77, 77, 0.2);
+        }
+
+        .card.out { opacity: 0.15; filter: grayscale(1); pointer-events: none; }
+        .card.out::after { content: "SOLD OUT"; position: absolute; top: 15px; font-size: 0.6rem; font-weight: 800; color: var(--primary); width: 100%; left: 0; }
+
+        .icon { font-size: 48px; margin-bottom: 15px; display: block; color: #fff; transition: 0.3s; }
+        .selected .icon { color: var(--primary); }
+
+        .name { font-weight: 700; display: block; margin-bottom: 5px; font-size: 1.1rem; }
+        .price { color: var(--secondary); font-weight: 800; font-size: 0.9rem; opacity: 0.9; }
+
+        /* Order Review Panel */
+        .review-box {
+            background: var(--glass); border: 1px solid var(--border);
+            border-radius: 24px; padding: 25px; margin-top: 40px;
+        }
+        .line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.9rem; color: #aaa; }
+        .total-line { border-top: 1px solid var(--border); padding-top: 15px; margin-top: 15px; color: #fff; font-weight: 800; font-size: 1.4rem; }
+
+        /* Floating Nav */
+        .footer { position: fixed; bottom: 0; left: 0; right: 0; padding: 30px 20px; background: linear-gradient(transparent, #050505 60%); z-index: 200; }
+        
+        .btn {
+            width: 100%; max-width: 500px; margin: 0 auto; padding: 22px; border: none; border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 12px 35px rgba(255, 77, 77, 0.4);
+            cursor: pointer; display: none;
+        }
+        .btn.show { display: block; animation: pop 0.3s ease; }
+        @keyframes pop { from { transform: scale(0.9); opacity: 0; } }
+
+        /* Hidden Manager Panel */
+        #admin { display: none; position: fixed; inset: 0; background: #000; z-index: 1000; padding: 40px 20px; overflow-y: auto; }
+        .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 18px; border-bottom: 1px solid #222; }
+        .toggle { padding: 10px 20px; border-radius: 12px; border: none; font-weight: 800; color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo" id="manager-entry">SUPERBOWl</div>
+    <div class="xp-track"><div class="xp-fill" id="progress"></div></div>
+</header>
+
+<div class="stage active" id="stg1">
+    <h2>The Foundation</h2>
+    <p class="sub">Choose a base for your bowl</p>
+    <div class="grid" id="list-bases"></div>
+</div>
+
+<div class="stage" id="stg2">
+    <h2>The Protein</h2>
+    <p class="sub">Pick your favorite energy source</p>
+    <div class="grid" id="list-proteins"></div>
+</div>
+
+<div class="stage" id="stg3">
+    <h2>The Toppings</h2>
+    <p class="sub">Select as many as you'd like</p>
+    <div class="grid" id="list-extras"></div>
+    
+    <div class="review-box">
+        <div class="line"><span>Base</span><span id="rev-base">-</span></div>
+        <div class="line"><span>Protein</span><span id="rev-protein">-</span></div>
+        <div class="total-line"><span>Total Amount</span><span id="rev-total">$0.00</span></div>
+    </div>
+</div>
+
+<div class="footer">
+    <button class="btn" id="main-btn" onclick="flow()">Next Level →</button>
+</div>
+
+<div id="admin">
+    <h2 style="text-align: left;">Soft Opening Manager</h2>
+    <p style="color: #666; margin-bottom: 30px;">Toggle items "In Stock" or "Sold Out"</p>
+    <div id="admin-controls"></div>
+    <button class="btn show" onclick="location.reload()" style="background: #222; margin-top: 40px;">Save Changes</button>
+</div>
+
+<script>
+    // ACCURATE DATA & ICONS
+    const menu = JSON.parse(localStorage.getItem('superbowl_live')) || {
+        bases: [
+            { n: "Quinoa", p: 3.50, i: "grains", out: false },
+            { n: "White Rice", p: 2.50, i: "drop", out: false },
+            { n: "Sweet Potato", p: 3.00, i: "cooking-pot", out: false },
+            { n: "Salad Mix", p: 2.50, i: "leaf", out: false }
+        ],
+        proteins: [
+            { n: "Grilled Chicken", p: 4.50, i: "bird", out: false },
+            { n: "Crispy Strips", p: 5.00, i: "lightning", out: false },
+            { n: "Double Beef", p: 7.00, i: "fire", out: false }
+        ],
+        extras: [
+            { n: "Avocado", p: 1.50, i: "circle-half", out: false },
+            { n: "Fresh Corn", p: 1.00, i: "grid-four", out: false },
+            { n: "Spicy Jalapeno", p: 1.00, i: "flame", out: false }
+        ]
+    };
+
+    let step = 0;
+    let selection = { base: null, protein: null, extras: [] };
+    let adminClicks = 0;
+
+    function render() {
+        drawGrid('list-bases', menu.bases, 'base');
+        drawGrid('list-proteins', menu.proteins, 'protein');
+        drawGrid('list-extras', menu.extras, 'extra');
+        calcTotal();
+    }
+
+    function drawGrid(containerId, items, type) {
+        const grid = document.getElementById(containerId);
+        grid.innerHTML = items.map(item => {
+            let isSelected = (type === 'extra') ? selection.extras.some(e => e.n === item.n) : selection[type]?.n === item.n;
+            return `
+            <div class="card ${isSelected ? 'selected' : ''} ${item.out ? 'out' : ''}" onclick="selectItem('${type}','${item.n}')">
+                <i class="ph-fill ph-${item.i} icon"></i>
+                <span class="name">${item.n}</span>
+                <span class="price">+$${item.p.toFixed(2)}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function selectItem(type, name) {
+        const list = menu[type === 'extra' ? 'extras' : type + 's'];
+        const item = list.find(i => i.n === name);
+        
+        if (type === 'extra') {
+            const idx = selection.extras.findIndex(e => e.n === name);
+            idx > -1 ? selection.extras.splice(idx, 1) : selection.extras.push(item);
+        } else {
+            selection[type] = item;
+        }
+        
+        document.getElementById('main-btn').classList.add('show');
+        render();
+    }
+
+    function calcTotal() {
+        let total = (selection.base?.p || 0) + (selection.protein?.p || 0);
+        selection.extras.forEach(e => total += e.p);
+        document.getElementById('rev-base').innerText = selection.base?.n || "-";
+        document.getElementById('rev-protein').innerText = selection.protein?.n || "-";
+        document.getElementById('rev-total').innerText = `$${total.toFixed(2)}`;
+    }
+
+    function flow() {
+        if (step < 2) {
+            document.getElementById(`stg${step+1}`).classList.remove('active');
+            step++;
+            document.getElementById(`stg${step+1}`).classList.add('active');
+            document.getElementById('progress').style.width = ((step+1) * 33.3) + "%";
+            document.getElementById('main-btn').classList.remove('show');
+            if (step === 2) {
+                document.getElementById('main-btn').innerText = "Complete Order 🚀";
+                document.getElementById('main-btn').classList.add('show');
+            }
+        } else {
+            const extrasStr = selection.extras.map(e => e.n).join(', ') || 'None';
+            const total = document.getElementById('rev-total').innerText;
+            const msg = `*NEW SUPERBOWL ORDER!*%0A---%0A*Base:* ${selection.base.n}%0A*Protein:* ${selection.protein.n}%0A*Toppings:* ${extrasStr}%0A*Total:* ${total}`;
+            window.open(`https://wa.me/96170000000?text=${msg}`);
+        }
+    }
+
+    // MANAGER PANEL LOGIC
+    document.getElementById('manager-entry').onclick = () => {
+        adminClicks++;
+        if (adminClicks >= 3) {
+            document.getElementById('admin').style.display = 'block';
+            let html = "";
+            Object.keys(menu).forEach(cat => {
+                html += `<h4 style="color:var(--secondary); text-transform:uppercase; margin-top:30px;">${cat}</h4>`;
+                menu[cat].forEach(item => {
+                    html += `<div class="admin-item"><span>${item.n}</span>
+                    <button class="toggle" style="background:${item.out ? '#ff4d4d':'#4caf50'}" onclick="toggleStock('${cat}','${item.n}')">
+                    ${item.out ? 'SOLD OUT':'AVAILABLE'}</button></div>`;
+                });
+            });
+            document.getElementById('admin-controls').innerHTML = html;
+        }
+    };
+
+    function toggleStock(cat, name) {
+        const item = menu[cat].find(i => i.n === name);
+        item.out = !item.out;
+        localStorage.setItem('chickeez_live', JSON.stringify(menu));
+        document.getElementById('manager-entry').click(); // Refresh admin list
+    }
+
+    render();
+</script>
+</body>
+</html>
+

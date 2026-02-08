@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamHome Realty - Find Your Perfect Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div> 
+        
+        <div class="hero-content">
+            <h1>
+                DreamHome Realty
+            </h1>
+            <p>
+                Discover the perfect property that matches your lifestyle
+            </p>
+            <a href="#properties" class="hero-button" aria-label="Browse Available Properties">
+                Browse Properties
+            </a>
+        </div>
+    </section>
+
+    <section id="features" class="py-16, py-24">
+        <h2 class="text-center">Why Choose Us</h2>
+        <div class="features-grid">
+    
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3>Wide Selection</h3>
+                <p>Browse thousands of properties across various neighborhoods and price ranges.</p>
+            </div>
+        
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <h3>Expert Agents</h3>
+                <p>Our experienced agents are dedicated to helping you find the perfect home.</p>
+            </div>
+        
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <h3>Professional Service</h3>
+                <p>We provide end-to-end support throughout your home buying journey.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="properties" class="bg-white py-16 py-24">
+        <div class="container">
+            <h2 class="text-center">Featured Properties</h2>
+            <div class="properties-grid">
+                
+                <article class="property-card">
+                   <img src="AI-generated-home.jpg"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x250/2c3e50/ffffff?text=Modern+Home';"
+                         alt="Exterior of a modern family house" loading="lazy">
+                    <div class="property-content">
+                        <h3>Modern Family Home</h3>
+                        <p class="property-price">$850,000</p>
+                        <p class="property-details">4 Beds • 3 Baths • 2,500 sq ft</p>
+                        <p class="property-description">Beautiful modern home with open floor plan and smart features, located close to parks and schools.</p>
+                        <a href="#" class="property-link">View Details &rarr;</a>
+                    </div>
+                </article>
+
+                
+                <article class="property-card">
+                    <img src="AI-generated-villa.jpg"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x250/34495e/ffffff?text=Luxury+Villa';"
+                         alt="Exterior of a luxury villa with swimming pool" loading="lazy">
+                    <div class="property-content">
+                        <h3>Luxury Villa</h3>
+                        <p class="property-price">$1,200,000</p>
+                        <p class="property-details">5 Beds • 4 Baths • 3,800 sq ft</p>
+                        <p class="property-description">Stunning villa with private pool, panoramic views, and expansive garden area for entertaining.</p>
+                        <a href="#" class="property-link">View Details &rarr;</a>
+                    </div>
+                </article>
+
+                
+                <article class="property-card">
+                    <img src="AI-generated-cottage.jpg"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x250/1abc9c/ffffff?text=Cozy+Cottage';"
+                         alt="Exterior of a cozy cottage in a forest setting" loading="lazy">
+                    <div class="property-content">
+                        <h3>Cozy Cottage</h3>
+                        <p class="property-price">$650,000</p>
+                        <p class="property-details">3 Beds • 2 Baths • 1,800 sq ft</p>
+                        <p class="property-description">Charming cottage situated in a quiet, secluded neighborhood, perfect for peaceful living.</p>
+                        <a href="#" class="property-link">View Details &rarr;</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact" class="contact-section py-16 py-24 container">
+        <h2 class="text-center">Get in Touch</h2>
+        <form class="contact-form" onsubmit="event.preventDefault(); showConfirmation();">
+            
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" required
+                       class="form-input"
+                       aria-required="true" placeholder="Your Name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="form-input"
+                       aria-required="true" placeholder="you@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone (Optional)</label>
+                <input type="tel" id="phone" name="phone"
+                       class="form-input"
+                       placeholder="(123) 456-7890">
+            </div>
+            
+            <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" required rows="5"
+                          class="form-textarea"
+                          aria-required="true" placeholder="Tell us about your needs..."></textarea>
+            </div>
+            
+            <button type="submit" class="form-button">
+                Send Message
+            </button>
+            <div id="confirmation-message" role="status" aria-live="polite">
+                Thank you! Your message has been sent successfully. We will be in touch soon.
+            </div>
+        </form>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 DreamHome Realty. All rights reserved.</p>
+            <div class="footer-note">
+                A professional service focused on finding your dream home.
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        
+        function showConfirmation() {
+            const form = document.querySelector('form');
+            const messageDiv = document.getElementById('confirmation-message');
+
+        
+            messageDiv.style.display = 'block'; 
+            form.reset(); 
+
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grilled Bun | Crafted Obsession</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --accent:#ff3b00;
+  --bg:#060606;
+  --card:#0e0e0e;
+  --text:#ffffff;
+  --muted:#8a8a8a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+/* ===== BACKGROUND CINEMA ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:22px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(14px);
+  z-index:1000;
+}
+.logo{
+  font-family:"Bebas Neue";
+  font-size:2.2rem;
+  letter-spacing:6px;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:36px;
+  font-weight:600;
+  letter-spacing:2px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:140px 7%;
+  position:relative;
+  z-index:1;
+}
+.hero-content{
+  max-width:720px;
+}
+.hero h1{
+  font-family:"Bebas Neue";
+  font-size:clamp(4.5rem,11vw,9rem);
+  line-height:.9;
+}
+.hero h1 span{
+  color:var(--accent);
+}
+.hero p{
+  margin:30px 0 45px;
+  font-size:1.1rem;
+  color:var(--muted);
+  max-width:520px;
+}
+.cta{
+  display:inline-block;
+  padding:18px 44px;
+  background:var(--accent);
+  color:#000;
+  font-weight:900;
+  letter-spacing:3px;
+  text-decoration:none;
+}
+
+/* FLOATING BURGER */
+.hero-burger{
+  position:absolute;
+  right:-5%;
+  bottom:-10%;
+  width:55%;
+  max-width:820px;
+  z-index:-1;
+  transform:rotate(-6deg);
+}
+.hero-burger img{
+  width:100%;
+  filter:drop-shadow(0 60px 120px rgba(0,0,0,.9));
+}
+
+/* ===== SECTION ===== */
+section{
+  padding:140px 7%;
+  position:relative;
+  z-index:1;
+}
+.section-title{
+  font-family:"Bebas Neue";
+  font-size:3.2rem;
+  letter-spacing:6px;
+  margin-bottom:80px;
+}
+
+/* ===== MENU ===== */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:50px;
+}
+.item{
+  background:var(--card);
+  border:1px solid #1a1a1a;
+  transition:.45s ease;
+  position:relative;
+}
+.item::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,59,0,.15),transparent);
+  opacity:0;
+  transition:.45s;
+}
+.item:hover::after{opacity:1}
+.item:hover{
+  transform:translateY(-14px);
+  border-color:var(--accent);
+}
+.item img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+.item-info{
+  padding:34px;
+}
+.item-info h3{
+  font-family:"Bebas Neue";
+  font-size:2rem;
+  letter-spacing:2px;
+}
+.price{
+  color:var(--accent);
+  font-weight:900;
+  margin:12px 0;
+}
+.item-info p{
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+/* ===== STATEMENT ===== */
+.statement{
+  text-align:center;
+  max-width:900px;
+  margin:auto;
+}
+.statement h2{
+  font-family:"Bebas Neue";
+  font-size:clamp(3rem,7vw,5rem);
+  line-height:1;
+}
+.statement span{color:var(--accent)}
+
+/* ===== ORDER ===== */
+.order{
+  background:linear-gradient(135deg,#ff3b00,#ff7a00);
+  color:#000;
+  text-align:center;
+}
+.order h2{
+  font-family:"Bebas Neue";
+  font-size:3.5rem;
+  margin-bottom:20px;
+}
+.order a{
+  display:inline-block;
+  background:#000;
+  color:#fff;
+  padding:20px 48px;
+  text-decoration:none;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  padding:50px;
+  text-align:center;
+  color:#555;
+  font-size:.8rem;
+  letter-spacing:4px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav a{display:none}
+  .hero-burger{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fx"></canvas>
+
+<nav>
+  <div class="logo">Grilled Bun</div>
+  <div>
+    <a href="#menu">MENU</a>
+    <a href="#order">ORDER</a>
+</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>BURGER<br><span>OBSESSION</span></h1>
+    <p>We don’t sell fast food.  
+    We craft indulgence, seared in fire and built for people who crave.</p>
+    <a href="#menu" class="cta">DISCOVER</a>
+  </div>
+  <div class="hero-burger">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1600">
+  </div>
+</section>
+
+<section id="menu">
+  <h2 class="section-title">SIGNATURE BUILDS</h2>
+  <div class="menu">
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1400">
+      <div class="item-info">
+        <h3>BLACKBUN OG</h3>
+        <div class="price">$14</div>
+        <p>Double smashed beef, aged cheddar, black garlic mayo.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?q=80&w=1400">
+      <div class="item-info">
+        <h3>INFERNO</h3>
+        <div class="price">$16</div>
+        <p>Smoked beef, chili jam, molten cheese.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?q=80&w=1400">
+      <div class="item-info">
+        <h3>DIRTY FRIES</h3>
+        <div class="price">$8</div>
+        <p>Crispy fries, beef crumble, cheese sauce.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <h2>BUILT FOR PEOPLE<br><span>WHO DON’T SETTLE</span></h2>
+</section>
+
+<section class="order" id="order">
+  <h2>ORDER IN SECONDS</h2>
+  <p>Tap. Send. Feast.</p>
+  <a href="https://wa.me/961XXXXXXXX">ORDER ON WHATSAPP</a>
+</section>
+
+<footer>
+© 2025 GRILLED BUN — OBSESSION, SERVED HOT
+</footer>
+
+<script>
+const c=document.getElementById("fx"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+window.onresize=resize;resize();
+
+let p=[...Array(180)].map(()=>({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  r:Math.random()*2+0.5,
+  v:Math.random()*0.7+0.2
+}));
+
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  p.forEach(e=>{
+    e.y-=e.v;
+    if(e.y<0)e.y=c.height;
+    ctx.fillStyle="rgba(255,59,0,.55)";
+    ctx.beginPath();
+    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
